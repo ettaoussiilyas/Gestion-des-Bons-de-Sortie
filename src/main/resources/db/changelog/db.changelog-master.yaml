@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/db.changelog-v001-create-products-table.yaml
+      file: db/changelog/changess/db.changelog-v001-create-products-table.yaml
+  - include:
+    file: db/changelog/changes/2025-10-28-create-fournisseur.yaml.yaml

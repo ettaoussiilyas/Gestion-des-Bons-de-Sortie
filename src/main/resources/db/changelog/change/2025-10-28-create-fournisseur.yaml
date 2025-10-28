@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20251028-create-fournisseur
+      author: ilyas
+      changes:
+        - createTable:
+            tableName: fournisseur
+            columns:
+              - column:
+                    name: id
+                    type: BIGINT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+              - column:
+                  name: raison_social
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address_complete
+                  type: VARCHAR(225)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: personne_contact
+                  type: VARCHAR(225)
+              - column:
+                  name: email
+                  type: varchar(225)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: telephone
+                  type: varchar(225)
+              - column:
+                  name: ville
+                  type: VARCHAR(255)
+              - column:
+                  name: ice
+                  type: VARCHAR(255)
+                  constraints:
