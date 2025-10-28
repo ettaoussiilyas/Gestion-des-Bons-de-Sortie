@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.entities;
+package com.restapi.gestion_bons.entitie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
