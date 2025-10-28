@@ -1,17 +1,3 @@
 databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: ilyas
-      changes:
-        - createTable:
-            tableName: utilisateur
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-              - column:
-                  name: nom
-                  type: VARCHAR(255)
+  - include:
+      file: db/changelog/db.changelog-v001-create-products-table.yaml
