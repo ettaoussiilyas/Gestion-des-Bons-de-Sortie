@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.utils;
+package com.restapi.gestion_bons.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

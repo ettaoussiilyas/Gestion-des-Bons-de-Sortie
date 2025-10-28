@@ -1,7 +1,7 @@
-package com.restapi.gestion_bons.controllers;
+package com.restapi.gestion_bons.controller;
 
-import com.restapi.gestion_bons.entities.Product;
-import com.restapi.gestion_bons.services.ProductService;
+import com.restapi.gestion_bons.entitie.Product;
+import com.restapi.gestion_bons.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

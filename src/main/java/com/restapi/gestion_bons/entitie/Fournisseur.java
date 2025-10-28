@@ -1,9 +1,6 @@
-package com.restapi.gestion_bons.Entity;
+package com.restapi.gestion_bons.entitie;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 

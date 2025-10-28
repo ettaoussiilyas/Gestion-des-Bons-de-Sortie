@@ -1,10 +1,10 @@
-package com.restapi.gestion_bons.services;
+package com.restapi.gestion_bons.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restapi.gestion_bons.dao.ProductDAO;
-import com.restapi.gestion_bons.entities.Product;
+import com.restapi.gestion_bons.entitie.Product;
 
 import java.util.List;
 import java.util.NoSuchElementException;
