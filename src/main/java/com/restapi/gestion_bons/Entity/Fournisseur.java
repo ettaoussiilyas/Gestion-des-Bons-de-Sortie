@@ -18,22 +18,18 @@ import lombok.*;
 public class Fournisseur {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(name = "raison_social", nullable = false)
     private String raisonSociale;
 
-    @Column(name = "addresse_complet", nullable = false)
-    private String addresseComplet;
+    @Column(name = "address_complete", nullable = false)
+    private String addressComplete;
 
     @Column(name = "personne_contact")
-    @Nullable
     private String personneContact;
 
-    @Email
-    @NotBlank
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -42,7 +38,6 @@ public class Fournisseur {
 
     private String ville;
 
-    @Column(unique = true)
     private String ice;
 
 }
