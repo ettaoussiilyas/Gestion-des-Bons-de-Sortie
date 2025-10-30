@@ -1,5 +1,4 @@
-package com.restapi.gestion_bons.dto;
-
+package com.restapi.gestion_bons.dto.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,13 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
-
+public class ProductUpdateDTO {
     private Long id;
     private String reference;
     private String name;
@@ -24,5 +21,4 @@ public class ProductDTO {
     private Integer currentStock;
     private Integer reorderPoint;
     private String unitOfMeasure;
-
 }
