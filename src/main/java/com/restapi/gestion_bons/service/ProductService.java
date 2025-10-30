@@ -1,48 +1,54 @@
 package com.restapi.gestion_bons.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restapi.gestion_bons.dao.ProductDAO;
 import com.restapi.gestion_bons.entitie.Product;
+import com.restapi.gestion_bons.dto.product.ProductCreateDTO;
+import com.restapi.gestion_bons.dto.product.ProductResponseDTO;
+import com.restapi.gestion_bons.dto.product.ProductUpdateDTO;
+import com.restapi.gestion_bons.mapper.ProductMapper;
+
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
     private final ProductDAO productDAO;
+    private final ProductMapper productMapper;
 
-    @Autowired
-    public ProductService(ProductDAO productDAO) {
-        this.productDAO = productDAO;
+    public List<ProductResponseDTO> findAll() {
+        return productDAO.findAll().stream().map(productMapper::toResponseDto).toList();
     }
 
-    public List<Product> findAll() {
-        return productDAO.findAll();
+    public Optional<ProductResponseDTO> findById(Long id) {
+        return productDAO.findById(id).map(productMapper::toResponseDto);
     }
 
-    public Optional<Product> findById(Long id) {
-        return productDAO.findById(id);
+    public ProductResponseDTO save(ProductCreateDTO dto) {
+        Product p = productMapper.toEntity(dto);
+        Product saved = productDAO.save(p);
+        return productMapper.toResponseDto(saved);
     }
 
-    public Product save(Product product) {
-        return productDAO.save(product);
-    }
-
-    public Product update(Long id, Product update) {
+    public ProductResponseDTO update(Long id, ProductUpdateDTO dto) {
         return productDAO.findById(id).map(existing -> {
-            // copy mutable fields
-            existing.setReference(update.getReference());
-            existing.setName(update.getName());
-            existing.setDescription(update.getDescription());
-            existing.setUnitPrice(update.getUnitPrice());
-            existing.setCategory(update.getCategory());
-            existing.setCurrentStock(update.getCurrentStock());
-            existing.setReorderPoint(update.getReorderPoint());
-            existing.setUnitOfMeasure(update.getUnitOfMeasure());
-            return productDAO.save(existing);
+            Product updated = productMapper.toEntity(dto);
+            // copy mutable fields from mapped updated to existing
+            existing.setReference(updated.getReference());
+            existing.setName(updated.getName());
+            existing.setDescription(updated.getDescription());
+            existing.setUnitPrice(updated.getUnitPrice());
+            existing.setCategory(updated.getCategory());
+            existing.setCurrentStock(updated.getCurrentStock());
+            existing.setReorderPoint(updated.getReorderPoint());
+            existing.setUnitOfMeasure(updated.getUnitOfMeasure());
+            Product saved = productDAO.save(existing);
+            return productMapper.toResponseDto(saved);
         }).orElseThrow(() -> new NoSuchElementException("Product not found with id " + id));
     }
 
