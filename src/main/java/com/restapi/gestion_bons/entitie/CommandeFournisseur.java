@@ -6,6 +6,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "commande_fournisseur")
@@ -30,16 +31,15 @@ public class CommandeFournisseur {
     @Column(name = "statut", nullable = false)
     @Enumerated(EnumType.STRING)
     private String statut;
-//    private CommandeStatus statut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fournisseur_id", nullable = false)
     private Fournisseur fournisseurId;
 
-//    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<LigneCommande> lignesCommande;
-//
-//    @OneToMany(mappedBy = "commandeFournisseur", cascade = CascadeType.ALL)
-//    private List<Lot> lots;
+    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LigneCommande> lignesCommande;
+
+    @OneToMany(mappedBy = "commandeFournisseur", cascade = CascadeType.ALL)
+    private List<Lot> lots;
 
 }
