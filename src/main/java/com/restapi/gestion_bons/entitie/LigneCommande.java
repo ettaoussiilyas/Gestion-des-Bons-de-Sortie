@@ -1,7 +1,11 @@
 package com.restapi.gestion_bons.entitie;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ligne_commande")
@@ -14,19 +18,25 @@ public class LigneCommande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "commande_id", nullable = false)
     private CommandeFournisseur commande;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produit_id", nullable = false)
     private Product produit;
 
+    @NotNull
+    @Positive
     @Column(name = "quantite_commandee", nullable = false)
     private Integer quantiteCommandee;
 
+    @NotNull
+    @Positive
     @Column(name = "prix_achat_unitaire", nullable = false)
     private Double prixAchatUnitaire;
 }

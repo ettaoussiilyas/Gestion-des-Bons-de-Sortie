@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,16 +31,16 @@ public class CommandeFournisseur {
 
     @Column(name = "statut", nullable = false)
     @Enumerated(EnumType.STRING)
-    private String statut;
+    private CommandeStatus statut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fournisseur_id", nullable = false)
-    private Fournisseur fournisseurId;
+    private Fournisseur fournisseur;
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LigneCommande> lignesCommande;
 
     @OneToMany(mappedBy = "commandeFournisseur", cascade = CascadeType.ALL)
-    private List<Lot> lots;
+    private List<Lot> lots = new ArrayList<>();
 
 }

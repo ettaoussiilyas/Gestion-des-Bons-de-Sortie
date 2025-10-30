@@ -1,9 +1,6 @@
 package com.restapi.gestion_bons.entitie;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +16,10 @@ public class Product {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "reference")
+    @Column(name = "reference_produit", unique = true, nullable = false)
     private String reference;
 
     @Column(name = "name")
@@ -30,7 +28,7 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "unit_price")
+    @Column(name = "prix_unitaire")
     private BigDecimal unitPrice;
 
     @Column(name = "category")
