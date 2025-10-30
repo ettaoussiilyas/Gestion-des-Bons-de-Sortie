@@ -1,5 +1,6 @@
 package com.restapi.gestion_bons.entitie;
 
+import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
@@ -29,6 +30,7 @@ public class CommandeFournisseur {
     @Column(name = "statut", nullable = false)
     @Enumerated(EnumType.STRING)
     private String statut;
+//    private CommandeStatus statut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fournisseur_id", nullable = false)
