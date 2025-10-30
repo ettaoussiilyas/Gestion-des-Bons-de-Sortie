@@ -1,0 +1,38 @@
+### Create product
+POST http://localhost:8080/v1/products
+Content-Type: application/json
+
+{
+  "reference": "REF-001",
+  "name": "Sample Product",
+  "description": "A test product",
+  "unitPrice": 19.99,
+  "category": "General",
+  "currentStock": 100,
+  "reorderPoint": 10,
+  "unitOfMeasure": "pcs"
+}
+
+### List all products
+GET http://localhost:8080/v1/products
+
+### Get product by id
+GET http://localhost:8080/v1/products/2
+
+### Update product
+PUT http://localhost:8080/v1/products/2
+Content-Type: application/json
+
+{
+  "reference": "REF-001-UPDATED",
+  "name": "Sample Product Updated",
+  "description": "Updated description",
+  "unitPrice": 24.99,
+  "category": "UpdatedCategory",
+  "currentStock": 80,
+  "reorderPoint": 5,
+  "unitOfMeasure": "pcs"
+}
+
+### Delete product
+DELETE http://localhost:8080/v1/products/2
