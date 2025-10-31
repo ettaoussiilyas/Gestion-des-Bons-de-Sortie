@@ -2,7 +2,6 @@ package com.restapi.gestion_bons.entitie;
 
 import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.util.ArrayList;

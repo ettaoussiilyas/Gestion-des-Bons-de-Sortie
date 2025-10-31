@@ -28,12 +28,12 @@ public class FournisseurController {
 
     @GetMapping("/{id}")
     public ResponseEntity<FournisseurResponseDTO> getFournisseurById(@PathVariable Long id) {
-        FournisseurResponseDTO fournisseur = fournisseurService.findById(id);
-        return ResponseEntity.ok(fournisseur);
+        return ResponseEntity.ok(fournisseurService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<FournisseurResponseDTO> createFournisseur(@Valid @RequestBody FournisseurCreateDTO createDTO) {
+    public ResponseEntity<FournisseurResponseDTO> createFournisseur(
+            @Valid @RequestBody FournisseurCreateDTO createDTO) {
         FournisseurResponseDTO created = fournisseurService.save(createDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
