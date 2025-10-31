@@ -41,3 +41,4 @@ databaseChangeLog:
                   name: ice
                   type: VARCHAR(255)
                   constraints:
+                    nullable: false
