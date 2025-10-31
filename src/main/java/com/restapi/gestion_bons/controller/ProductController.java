@@ -1,9 +1,8 @@
 package com.restapi.gestion_bons.controller;
 
-import com.restapi.gestion_bons.dto.product.ProductCreateDTO;
 import com.restapi.gestion_bons.dto.product.ProductResponseDTO;
-import com.restapi.gestion_bons.dto.product.ProductUpdateDTO;
-import com.restapi.gestion_bons.service.ProductService;
+import com.restapi.gestion_bons.contracts.ProductServiceContract;
+import com.restapi.gestion_bons.dto.product.ProductRequestDTO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
-
-    private final ProductService productService;
+    private final ProductServiceContract productService;
 
     @GetMapping
     public List<ProductResponseDTO> listAll() {
@@ -35,13 +33,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> create(@RequestBody @Valid ProductCreateDTO dto) {
+    public ResponseEntity<ProductResponseDTO> create(@RequestBody @Valid ProductRequestDTO dto) {
         ProductResponseDTO saved = productService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> update(@PathVariable Long id, @RequestBody @Valid ProductUpdateDTO dto) {
+    public ResponseEntity<ProductResponseDTO> update(@PathVariable Long id, @RequestBody @Valid ProductRequestDTO dto) {
         try {
             ProductResponseDTO updated = productService.update(id, dto);
             return ResponseEntity.ok(updated);
@@ -59,4 +57,26 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/ByName/{name}")
+    public ResponseEntity<ProductResponseDTO> getByName(@PathVariable String name) {
+        return productService.findByName(name)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/ByReference/{reference}")
+    public ResponseEntity<ProductResponseDTO> getByReference(@PathVariable String reference) {
+        return productService.findByReference(reference)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/ByCategory/{category}")
+    public ResponseEntity<List<ProductResponseDTO>> getByCategory(@PathVariable String category) {
+        List<ProductResponseDTO> products = productService.findByCategory(category);
+        if (products.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(products);
+    }
 }
