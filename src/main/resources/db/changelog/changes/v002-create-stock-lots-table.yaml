@@ -4,7 +4,7 @@ databaseChangeLog:
       author: marouane
       changes:
         - createTable:
-            tableName: stock_lots
+            tableName: lots
             columns:
               - column:
                   name: id
@@ -19,7 +19,7 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_stocklot_product
+                    foreignKeyName: fk_lot_product
                     references: products(id)
                     onDelete: CASCADE
 

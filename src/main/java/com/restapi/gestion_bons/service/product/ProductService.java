@@ -65,10 +65,7 @@ public class ProductService implements ProductServiceContract {
             existing.setReference(updated.getReference());
             existing.setName(updated.getName());
             existing.setDescription(updated.getDescription());
-            existing.setUnitPrice(updated.getUnitPrice());
             existing.setCategory(updated.getCategory());
-            existing.setCurrentStock(updated.getCurrentStock());
-            existing.setReorderPoint(updated.getReorderPoint());
             existing.setUnitOfMeasure(updated.getUnitOfMeasure());
             Product saved = productDAO.save(existing);
             return productMapper.toResponseDto(saved);

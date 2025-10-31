@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.dto.stocklot;
+package com.restapi.gestion_bons.dto.Lot;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -8,8 +8,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class ResponseStockLotDTO extends RelationalStockLotDTO {
-    // inherits relational fields from RelationalStockLotDTO
+public class ResponseLotDTO extends RelationalLotDTO {
+    // inherits relational fields from RelationalLotDTO
     private Long productId;
     private Long commandeFournisseurId;
 }

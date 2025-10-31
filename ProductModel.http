@@ -6,10 +6,7 @@ Content-Type: application/json
   "reference": "REF-001",
   "name": "Sample Product",
   "description": "A test product",
-  "unitPrice": 19.99,
   "category": "General",
-  "currentStock": 100,
-  "reorderPoint": 10,
   "unitOfMeasure": "pcs"
 }
 
@@ -27,10 +24,7 @@ Content-Type: application/json
   "reference": "REF-001-UPDATED",
   "name": "Sample Product Updated",
   "description": "Updated description",
-  "unitPrice": 24.99,
   "category": "UpdatedCategory",
-  "currentStock": 80,
-  "reorderPoint": 5,
   "unitOfMeasure": "pcs"
 }
 

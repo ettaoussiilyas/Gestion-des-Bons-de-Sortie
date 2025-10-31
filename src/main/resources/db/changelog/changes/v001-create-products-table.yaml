@@ -27,18 +27,8 @@ databaseChangeLog:
                   name: description
                   type: TEXT
               - column:
-                  name: unit_price
-                  type: DECIMAL(19,2)
-                  constraints:
-                    nullable: false
-              - column:
                   name: category
                   type: VARCHAR(100)
-              - column:
-                  name: current_stock
-                  type: INT
-                  constraints:
-                    nullable: false
               - column:
                   name: reorder_point
                   type: INT

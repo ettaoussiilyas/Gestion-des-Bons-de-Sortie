@@ -1,11 +1,9 @@
 package com.restapi.gestion_bons.entitie;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class Product {
 
     @Id
@@ -35,21 +33,9 @@ public class Product {
     @Size(min = 2, max = 500, message = "Description must be between 2 and 500 characters")
     private String description;
 
-    @Column(name = "unit_price")
-    @Min(value = 0, message = "Unit price must be non-negative")
-    private BigDecimal unitPrice;
-
     @Column(name = "category")
     @Size(min = 2, max = 100, message = "Category must be between 2 and 100 characters")
     private String category;
-
-    @Column(name = "current_stock")
-    @Min(value = 0, message = "Current stock must be non-negative")
-    private Integer currentStock;
-
-    @Column(name = "reorder_point")
-    @Min(value = 0, message = "Reorder point must be non-negative")
-    private Integer reorderPoint;
 
     @Column(name = "unit_of_measure")
     private String unitOfMeasure;
@@ -57,7 +43,7 @@ public class Product {
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
     private List<LigneCommande> lignesCommande = new ArrayList<>();
 
-    @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Lot> lots = new ArrayList<>();
 
 }

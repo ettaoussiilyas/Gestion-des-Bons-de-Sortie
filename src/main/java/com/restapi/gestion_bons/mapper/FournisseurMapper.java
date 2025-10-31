@@ -4,7 +4,6 @@ import com.restapi.gestion_bons.dto.fournisseur.FournisseurCreateDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.Fournisseur;
-import com.restapi.gestion_bons.entitie.Product;
 import org.springframework.stereotype.Component;
 
 @Component
