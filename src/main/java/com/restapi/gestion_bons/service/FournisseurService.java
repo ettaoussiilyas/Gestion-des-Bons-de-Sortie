@@ -25,7 +25,7 @@ public class FournisseurService {
                 .collect(Collectors.toList());
     }
 
-    public FournisseurDTO findById(Integer id) {
+    public FournisseurDTO findById(Long id) {
         return fournisseurDAO.findById(id)
                 .map(fournisseurMapper::toDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Fournisseur not found with id: " + id));
@@ -37,7 +37,7 @@ public class FournisseurService {
         return fournisseurMapper.toDTO(saved);
     }
 
-    public FournisseurDTO update(Integer id, FournisseurDTO fournisseurDTO) {
+    public FournisseurDTO update(Long id, FournisseurDTO fournisseurDTO) {
         return fournisseurDAO.findById(id)
                 .map(existing -> {
                     Fournisseur toUpdate = fournisseurMapper.toEntity(fournisseurDTO);
@@ -47,7 +47,7 @@ public class FournisseurService {
                 .orElseThrow(() -> new EntityNotFoundException("Fournisseur not found with id: " + id));
     }
 
-    public void delete(Integer id) {
+    public void delete(Long id) {
         if (!fournisseurDAO.existsById(id)) {
             throw new EntityNotFoundException("Fournisseur not found with id: " + id);
         }

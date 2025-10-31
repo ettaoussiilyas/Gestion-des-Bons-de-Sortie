@@ -2,7 +2,6 @@ package com.restapi.gestion_bons.entitie;
 
 import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class CommandeFournisseur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "date_commande", nullable = false)
     @Temporal(TemporalType.DATE)

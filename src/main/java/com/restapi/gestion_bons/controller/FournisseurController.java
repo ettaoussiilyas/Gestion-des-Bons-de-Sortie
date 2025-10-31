@@ -25,7 +25,7 @@ public class FournisseurController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FournisseurDTO> getFournisseurById(@PathVariable Integer id) {
+    public ResponseEntity<FournisseurDTO> getFournisseurById(@PathVariable Long id) {
         return ResponseEntity.ok(fournisseurService.findById(id));
     }
 
@@ -37,13 +37,13 @@ public class FournisseurController {
 
     @PutMapping("/{id}")
     public ResponseEntity<FournisseurDTO> updateFournisseur(
-            @PathVariable Integer id,
+            @PathVariable Long id,
             @Valid @RequestBody FournisseurDTO fournisseurDTO) {
         return ResponseEntity.ok(fournisseurService.update(id, fournisseurDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFournisseur(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteFournisseur(@PathVariable Long id) {
         fournisseurService.delete(id);
         return ResponseEntity.noContent().build();
     }

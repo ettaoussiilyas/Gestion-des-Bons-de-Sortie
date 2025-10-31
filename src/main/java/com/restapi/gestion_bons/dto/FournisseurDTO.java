@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 public class FournisseurDTO {
 
-    private Integer id;
+    private Long id;
     private String raisonSociale;
     private String addressComplete;
     private String personneContact;

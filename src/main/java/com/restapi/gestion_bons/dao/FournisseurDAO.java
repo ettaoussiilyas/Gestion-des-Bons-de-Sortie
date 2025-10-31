@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FournisseurDAO extends JpaRepository<Fournisseur, Integer> {
+public interface FournisseurDAO extends JpaRepository<Fournisseur, Long> {
 }
