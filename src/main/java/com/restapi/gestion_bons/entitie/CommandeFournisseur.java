@@ -20,7 +20,7 @@ public class CommandeFournisseur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "date_commande", nullable = false)
     @Temporal(TemporalType.DATE)

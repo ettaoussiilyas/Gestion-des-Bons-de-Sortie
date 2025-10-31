@@ -1,14 +1,17 @@
-package com.restapi.gestion_bons.dto;
+package com.restapi.gestion_bons.dto.fournisseur;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FournisseurDTO {
+public class FournisseurResponseDTO {
 
-    private Integer id;
+    private Long id;
     private String raisonSociale;
     private String addressComplete;
     private String personneContact;
@@ -16,5 +19,4 @@ public class FournisseurDTO {
     private String telephone;
     private String ville;
     private String ice;
-
 }
