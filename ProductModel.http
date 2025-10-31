@@ -1,5 +1,5 @@
 ### Create product
-POST http://localhost:8080/v1/products
+POST http://localhost:8080/api/v1/products
 Content-Type: application/json
 
 {
@@ -14,13 +14,13 @@ Content-Type: application/json
 }
 
 ### List all products
-GET http://localhost:8080/v1/products
+GET http://localhost:8080/api/v1/products
 
 ### Get product by id
-GET http://localhost:8080/v1/products/2
+GET http://localhost:8080/api/v1/products/{id}
 
 ### Update product
-PUT http://localhost:8080/v1/products/2
+PUT http://localhost:8080/api/v1/products/{id}
 Content-Type: application/json
 
 {
@@ -35,4 +35,14 @@ Content-Type: application/json
 }
 
 ### Delete product
-DELETE http://localhost:8080/v1/products/2
+DELETE http://localhost:8080/api/v1/products/{id}
+
+### Get products by category
+GET http://localhost:8080/api/v1/products/ByCategory/{category}
+
+### Get products by name
+GET http://localhost:8080/api/v1/products/ByName/{name}
+
+### Get products by reference
+GET http://localhost:8080/api/v1/products/ByReference/{reference}
+

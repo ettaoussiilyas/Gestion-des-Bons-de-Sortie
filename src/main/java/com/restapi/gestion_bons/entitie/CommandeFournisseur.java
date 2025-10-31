@@ -29,8 +29,7 @@ public class CommandeFournisseur {
 
     @Column(name = "statut", nullable = false)
     @Enumerated(EnumType.STRING)
-    private String statut;
-//    private CommandeStatus statut;
+    private CommandeStatus statut;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fournisseur_id", nullable = false)
