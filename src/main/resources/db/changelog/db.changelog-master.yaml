@@ -2,6 +2,10 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/v001-create-products-table.yaml
   - include:
-      file: db/changelog/changes/2025-10-28-create-fournisseur.yaml
-  - include:
       file: db/changelog/changes/v002-create-stock-lots-table.yaml
+  - include:
+      file: db/changelog/changes/v003-create-fournisseur.yaml
+  - include:
+      file: db/changelog/changes/v005-create-commande-fournisseur.yaml
+  - include:
+      file: db/changelog/changes/v006-create-ligne-commande.yaml
