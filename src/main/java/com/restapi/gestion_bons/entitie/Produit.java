@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "produit")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-public class Product {
+public class Produit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +33,18 @@ public class Product {
     @Size(min = 2, max = 500, message = "Description must be between 2 and 500 characters")
     private String description;
 
+    @Column(name = "prix_unitaire", nullable = false)
+    private Double unitPrice;
+
     @Column(name = "category")
     @Size(min = 2, max = 100, message = "Category must be between 2 and 100 characters")
     private String category;
+
+    @Column(name = "stock_actuel")
+    private Integer stockActuel;
+
+    @Column(name = "point_de_commande")
+    private Integer commandePoint;
 
     @Column(name = "unit_of_measure")
     private String unitOfMeasure;
@@ -43,7 +52,16 @@ public class Product {
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
     private List<LigneCommande> lignesCommande = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
     private List<Lot> lots = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    private List<MouvementStock> mouvementsStocks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    private List<BonDeSortieLigne> bonDeSortieLignes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produit")
+    private List<MouvementStock> mouvements = new ArrayList<>();
 
 }

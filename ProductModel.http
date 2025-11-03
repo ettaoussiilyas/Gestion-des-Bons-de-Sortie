@@ -1,23 +1,23 @@
-### Create product
-POST http://localhost:8080/api/v1/products
+### Create produit
+POST http://localhost:8080/api/v1/produits
 Content-Type: application/json
 
 {
   "reference": "REF-001",
   "name": "Sample Product",
-  "description": "A test product",
+  "description": "A test produit",
   "category": "General",
   "unitOfMeasure": "pcs"
 }
 
-### List all products
-GET http://localhost:8080/api/v1/products
+### List all produits
+GET http://localhost:8080/api/v1/produits
 
-### Get product by id
-GET http://localhost:8080/api/v1/products/{id}
+### Get produit by id
+GET http://localhost:8080/api/v1/produits/{id}
 
-### Update product
-PUT http://localhost:8080/api/v1/products/{id}
+### Update produit
+PUT http://localhost:8080/api/v1/produits/{id}
 Content-Type: application/json
 
 {
@@ -28,15 +28,15 @@ Content-Type: application/json
   "unitOfMeasure": "pcs"
 }
 
-### Delete product
-DELETE http://localhost:8080/api/v1/products/{id}
+### Delete produit
+DELETE http://localhost:8080/api/v1/produits/{id}
 
-### Get products by category
-GET http://localhost:8080/api/v1/products/ByCategory/{category}
+### Get produits by category
+GET http://localhost:8080/api/v1/produits/ByCategory/{category}
 
-### Get products by name
-GET http://localhost:8080/api/v1/products/ByName/{name}
+### Get produits by name
+GET http://localhost:8080/api/v1/produits/ByName/{name}
 
-### Get products by reference
-GET http://localhost:8080/api/v1/products/ByReference/{reference}
+### Get produits by reference
+GET http://localhost:8080/api/v1/produits/ByReference/{reference}
 

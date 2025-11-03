@@ -2,30 +2,30 @@ package com.restapi.gestion_bons.mapper;
 
 import java.util.List;
 
+import com.restapi.gestion_bons.entitie.Produit;
 import org.mapstruct.Mapper;
 
 import com.restapi.gestion_bons.dto.product.ProductResponseDTO;
 import com.restapi.gestion_bons.dto.product.ProductRequestDTO;
-import com.restapi.gestion_bons.entitie.Product;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductResponseDTO toResponseDto(Product product);
+    ProductResponseDTO toResponseDto(Produit produit);
 
     ProductResponseDTO toResponseDto(ProductRequestDTO product);
 
-    ProductRequestDTO toProductRequestDTO(Product product);
+    ProductRequestDTO toProductRequestDTO(Produit produit);
 
     ProductRequestDTO toProductRequestDTO(ProductResponseDTO product);
 
-    Product toEntity(ProductRequestDTO dto);
+    Produit toEntity(ProductRequestDTO dto);
 
-    Product toEntity(ProductResponseDTO dto);
+    Produit toEntity(ProductResponseDTO dto);
 
-    List<ProductResponseDTO> toResponseDtoList(List<Product> products);
+    List<ProductResponseDTO> toResponseDtoList(List<Produit> produits);
 
-    List<ProductRequestDTO> toProductRequestDtoList(List<Product> products);
+    List<ProductRequestDTO> toProductRequestDtoList(List<Produit> produits);
 
-    List<Product> toEntityList(List<ProductResponseDTO> dtos);
+    List<Produit> toEntityList(List<ProductResponseDTO> dtos);
 }

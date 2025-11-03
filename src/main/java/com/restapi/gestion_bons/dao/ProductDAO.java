@@ -2,16 +2,15 @@ package com.restapi.gestion_bons.dao;
 
 import java.util.List;
 
+import com.restapi.gestion_bons.entitie.Produit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.restapi.gestion_bons.entitie.Product;
-
 @Repository
-public interface ProductDAO extends JpaRepository<Product, Long> {
-    Product findByReference(String reference);
+public interface ProductDAO extends JpaRepository<Produit, Long> {
+    Produit findByReference(String reference);
 
-    Product findByName(String name);
+    Produit findByName(String name);
 
-    List<Product> findByCategory(String category);
+    List<Produit> findByCategory(String category);
 }

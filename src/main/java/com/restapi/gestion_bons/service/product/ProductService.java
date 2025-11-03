@@ -1,11 +1,11 @@
 package com.restapi.gestion_bons.service.product;
 
+import com.restapi.gestion_bons.entitie.Produit;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.restapi.gestion_bons.contracts.ProductServiceContract;
 import com.restapi.gestion_bons.dao.ProductDAO;
-import com.restapi.gestion_bons.entitie.Product;
 import com.restapi.gestion_bons.dto.product.ProductResponseDTO;
 import com.restapi.gestion_bons.dto.product.ProductRequestDTO;
 import com.restapi.gestion_bons.exception.DuplicateResourceException;
@@ -39,8 +39,8 @@ public class ProductService implements ProductServiceContract {
         if (dto.getName() != null && productDAO.findByName(dto.getName()) != null) {
             throw new DuplicateResourceException("name", dto.getName());
         }
-        Product p = productMapper.toEntity(dto);
-        Product saved = productDAO.save(p);
+        Produit p = productMapper.toEntity(dto);
+        Produit saved = productDAO.save(p);
         return productMapper.toResponseDto(saved);
     }
 
@@ -48,26 +48,26 @@ public class ProductService implements ProductServiceContract {
         return productDAO.findById(id).map(existing -> {
             // if reference changed, ensure new reference is not taken
             if (dto.getReference() != null && !dto.getReference().equals(existing.getReference())) {
-                Product byRef = productDAO.findByReference(dto.getReference());
+                Produit byRef = productDAO.findByReference(dto.getReference());
                 if (byRef != null && !byRef.getId().equals(id)) {
                     throw new DuplicateResourceException("reference", dto.getReference());
                 }
             }
             // if name changed, ensure new name is not taken
             if (dto.getName() != null && !dto.getName().equals(existing.getName())) {
-                Product byName = productDAO.findByName(dto.getName());
+                Produit byName = productDAO.findByName(dto.getName());
                 if (byName != null && !byName.getId().equals(id)) {
                     throw new DuplicateResourceException("name", dto.getName());
                 }
             }
 
-            Product updated = productMapper.toEntity(dto);
+            Produit updated = productMapper.toEntity(dto);
             existing.setReference(updated.getReference());
             existing.setName(updated.getName());
             existing.setDescription(updated.getDescription());
             existing.setCategory(updated.getCategory());
             existing.setUnitOfMeasure(updated.getUnitOfMeasure());
-            Product saved = productDAO.save(existing);
+            Produit saved = productDAO.save(existing);
             return productMapper.toResponseDto(saved);
         }).orElseThrow(() -> new NoSuchElementException("Product not found with id " + id));
     }

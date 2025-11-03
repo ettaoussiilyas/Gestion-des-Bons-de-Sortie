@@ -36,8 +36,7 @@ public class CommandeFournisseur {
     @JoinColumn(name = "fournisseur_id", nullable = false)
     private Fournisseur fournisseur;
 
-    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LigneCommande> lignesCommande = new ArrayList<>();
 
     @OneToMany(mappedBy = "commandeFournisseur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
