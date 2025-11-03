@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
-      id: 20251030-create-ligne-commande
-      author: ai-assistant
+      id: create-ligne-commande-table
+      author: system
       changes:
         - createTable:
             tableName: ligne_commande
@@ -18,18 +18,14 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_ligne_commande_commande
-                    references: commande_fournisseur(id)
               - column:
                   name: produit_id
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_ligne_commande_produit
-                    references: products(id)
               - column:
                   name: quantite_commandee
-                  type: INT
+                  type: INTEGER
                   constraints:
                     nullable: false
               - column:
@@ -37,3 +33,15 @@ databaseChangeLog:
                   type: DOUBLE
                   constraints:
                     nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: ligne_commande
+            baseColumnNames: commande_id
+            referencedTableName: commande_fournisseur
+            referencedColumnNames: id
+            constraintName: fk_ligne_commande_commande
+        - addForeignKeyConstraint:
+            baseTableName: ligne_commande
+            baseColumnNames: produit_id
+            referencedTableName: produit
+            referencedColumnNames: id
+            constraintName: fk_ligne_commande_produit
