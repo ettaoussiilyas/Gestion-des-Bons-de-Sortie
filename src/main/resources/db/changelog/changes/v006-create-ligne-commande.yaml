@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20251030-create-ligne-commande
+      author: ai-assistant
+      changes:
+        - createTable:
+            tableName: ligne_commande
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: commande_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_ligne_commande_commande
+                    references: commande_fournisseur(id)
+              - column:
+                  name: produit_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_ligne_commande_produit
+                    references: products(id)
+              - column:
+                  name: quantite_commandee
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: prix_achat_unitaire
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
