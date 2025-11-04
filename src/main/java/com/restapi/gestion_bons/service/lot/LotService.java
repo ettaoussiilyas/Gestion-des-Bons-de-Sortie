@@ -29,7 +29,7 @@ public class LotService implements LotContract {
         if (dto == null) {
             throw new IllegalArgumentException("BaseStockLotDTO must not be null");
         }
-        if (dto.getProductId() == null) {
+        if (dto.getProduitId() == null) {
             throw new IllegalArgumentException("productId must be provided when creating a stock lot");
         }
 

@@ -61,6 +61,6 @@ public class Lot {
     @JoinColumn(name = "mouvement_stock_id")
     private MouvementStock mouvementStock;
 
-    @OneToMany(mappedBy = "lot", fetch = FetchType.LAZY)
-    private List<BonDeSortieLigne> bonDeSortieLignes;
+//    @OneToMany(mappedBy = "lot", fetch = FetchType.LAZY)
+//    private List<BonDeSortieLigne> bonDeSortieLignes;
 }
