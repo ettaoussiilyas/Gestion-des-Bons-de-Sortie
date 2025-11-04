@@ -54,5 +54,6 @@ public class Fournisseur {
     private String ice;
 
     @OneToMany(mappedBy = "fournisseur", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<CommandeFournisseur> commandes = new ArrayList<>();
 }

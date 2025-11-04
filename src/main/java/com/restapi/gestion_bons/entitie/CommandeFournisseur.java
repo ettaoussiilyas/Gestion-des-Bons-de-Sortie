@@ -37,9 +37,11 @@ public class CommandeFournisseur {
     private Fournisseur fournisseur;
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
     private List<LigneCommande> lignesCommande = new ArrayList<>();
 
     @OneToMany(mappedBy = "commandeFournisseur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Lot> lots = new ArrayList<>();
 
 }

@@ -35,6 +35,7 @@ public class BonDeSortie {
     private BonDeSortieStatus statut;
 
     @OneToMany(mappedBy = "bonDeSortie", fetch = FetchType.LAZY)
+    @Builder.Default
     private java.util.List<BonDeSortieLigne> bonDeSortieLignes = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,6 +43,7 @@ public class BonDeSortie {
     private Atelier atelier;
 
     @OneToMany(mappedBy = "bonDeSortie", fetch = FetchType.LAZY)
+    @Builder.Default
     private java.util.List<MouvementStock> mouvementsStocks = new ArrayList<>();
 
 }

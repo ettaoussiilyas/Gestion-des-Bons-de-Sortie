@@ -50,18 +50,23 @@ public class Produit {
     private String unitOfMeasure;
 
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<LigneCommande> lignesCommande = new ArrayList<>();
 
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Lot> lots = new ArrayList<>();
 
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<MouvementStock> mouvementsStocks = new ArrayList<>();
 
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<BonDeSortieLigne> bonDeSortieLignes = new ArrayList<>();
 
     @OneToMany(mappedBy = "produit")
+    @Builder.Default
     private List<MouvementStock> mouvements = new ArrayList<>();
 
 }
