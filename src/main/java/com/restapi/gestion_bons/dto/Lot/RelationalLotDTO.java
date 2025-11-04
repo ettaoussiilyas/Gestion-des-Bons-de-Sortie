@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class RelationalLotDTO extends BaseLotDTO {
-    // relation(s)
-    private ProductResponseDTO product;
+
+    private ProductResponseDTO produit;
     private CommandeFournisseur commandeFournisseur;
 }

@@ -9,7 +9,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class ResponseLotDTO extends RelationalLotDTO {
-    // inherits relational fields from RelationalLotDTO
-    private Long productId;
+    private Long produitId;
     private Long commandeFournisseurId;
 }

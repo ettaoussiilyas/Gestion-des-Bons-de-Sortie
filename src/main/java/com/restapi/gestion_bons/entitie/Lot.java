@@ -1,5 +1,6 @@
 package com.restapi.gestion_bons.entitie;
 
+import com.restapi.gestion_bons.entitie.enums.LotStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.restapi.gestion_bons.entitie.enums.LotStatus;
 
 @Entity
 @Table(name = "lot")
@@ -62,5 +62,5 @@ public class Lot {
     private MouvementStock mouvementStock;
 
     @OneToMany(mappedBy = "lot", fetch = FetchType.LAZY)
-    private List<BonDeSortieLigne> bonDeSortieLignes = new ArrayList<>();
+    private List<BonDeSortieLigne> bonDeSortieLignes;
 }

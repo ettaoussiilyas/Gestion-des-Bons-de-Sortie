@@ -13,11 +13,11 @@ import com.restapi.gestion_bons.entitie.enums.LotStatus;
 public class BaseLotDTO {
     // non-relational properties only
     private Long id;
-    private String lotNumber;
-    private Long productId;
-    private LocalDateTime entryDate;
-    private Integer initialQuantity;
-    private Integer remainingQuantity;
-    private BigDecimal purchaseUnitPrice;
-    private LotStatus status;
+    private String numeroLot;
+    private Long produitId;
+    private LocalDateTime dateEntree;
+    private Integer quantiteInitiale;
+    private Integer quantiteRestante;
+    private BigDecimal prixAchatUnitaire;
+    private LotStatus statut;
 }
