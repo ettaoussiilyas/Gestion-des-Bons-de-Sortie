@@ -1,9 +1,15 @@
 package com.restapi.gestion_bons.dto.atelier;
 
-import com.restapi.gestion_bons.entitie.BonDeSortie;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AtelierResponseDTO {
 
     private Long id;
