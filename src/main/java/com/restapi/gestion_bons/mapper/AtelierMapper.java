@@ -18,12 +18,10 @@ public interface AtelierMapper {
 
     // Create dto to entity
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "bonsDeSorties", ignore = true)
     Atelier toEntity(AtelierCreateDTO createDTO);
 
     // Update dto to entity
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "bonsDeSorties", ignore = true)
     void updateEntityFromDto(AtelierUpdateDTO updateDTO, @MappingTarget Atelier atelier);
 
     // List mapping
