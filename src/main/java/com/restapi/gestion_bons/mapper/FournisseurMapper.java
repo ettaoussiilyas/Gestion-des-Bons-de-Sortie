@@ -4,9 +4,10 @@ import com.restapi.gestion_bons.dto.fournisseur.FournisseurCreateDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.Fournisseur;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-@Component
+@Mapper(componentModel = "spring", uses = { FournisseurMapper.class })
 public interface FournisseurMapper {
 
 
