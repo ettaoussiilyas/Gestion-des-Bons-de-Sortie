@@ -24,5 +24,6 @@ public class Atelier {
     private String nom;
 
     @OneToMany(mappedBy = "atelier", fetch = FetchType.LAZY)
+    @Builder.Default
     private List<BonDeSortie> bonDeSorties = new ArrayList<>();
 }
