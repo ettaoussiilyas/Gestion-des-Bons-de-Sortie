@@ -28,7 +28,7 @@ public class LigneCommande {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produit_id", nullable = false)
-    private Product produit;
+    private Produit produit;
 
     @NotNull
     @Positive

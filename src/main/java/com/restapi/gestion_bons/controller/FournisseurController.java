@@ -1,6 +1,8 @@
 package com.restapi.gestion_bons.controller;
 
-import com.restapi.gestion_bons.dto.FournisseurDTO;
+import com.restapi.gestion_bons.dto.fournisseur.FournisseurCreateDTO;
+import com.restapi.gestion_bons.dto.fournisseur.FournisseurResponseDTO;
+import com.restapi.gestion_bons.dto.fournisseur.FournisseurUpdateDTO;
 import com.restapi.gestion_bons.service.FournisseurService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/fournisseurs")
 public class FournisseurController {
-
     private final FournisseurService fournisseurService;
 
     public FournisseurController(FournisseurService fournisseurService) {
@@ -20,26 +21,29 @@ public class FournisseurController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FournisseurDTO>> listAll() {
-        return ResponseEntity.ok(fournisseurService.findAll());
+    public ResponseEntity<List<FournisseurResponseDTO>> listAll() {
+        List<FournisseurResponseDTO> fournisseurs = fournisseurService.findAll();
+        return ResponseEntity.ok(fournisseurs);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FournisseurDTO> getFournisseurById(@PathVariable Long id) {
+    public ResponseEntity<FournisseurResponseDTO> getFournisseurById(@PathVariable Long id) {
         return ResponseEntity.ok(fournisseurService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<FournisseurDTO> createFournisseur(@Valid @RequestBody FournisseurDTO fournisseurDTO) {
-        FournisseurDTO created = fournisseurService.save(fournisseurDTO);
+    public ResponseEntity<FournisseurResponseDTO> createFournisseur(
+            @Valid @RequestBody FournisseurCreateDTO createDTO) {
+        FournisseurResponseDTO created = fournisseurService.save(createDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FournisseurDTO> updateFournisseur(
+    public ResponseEntity<FournisseurResponseDTO> updateFournisseur(
             @PathVariable Long id,
-            @Valid @RequestBody FournisseurDTO fournisseurDTO) {
-        return ResponseEntity.ok(fournisseurService.update(id, fournisseurDTO));
+            @Valid @RequestBody FournisseurUpdateDTO updateDTO) {
+        FournisseurResponseDTO updated = fournisseurService.update(id, updateDTO);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")

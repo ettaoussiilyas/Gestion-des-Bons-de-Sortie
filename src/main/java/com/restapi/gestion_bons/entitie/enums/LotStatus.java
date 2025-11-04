@@ -1,6 +1,6 @@
 package com.restapi.gestion_bons.entitie.enums;
 
-public enum StockLotStatus {
+public enum LotStatus {
     /** Lot is active and has available quantity */
     ACTIVE,
 

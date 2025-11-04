@@ -53,6 +53,6 @@ public class Fournisseur {
     @Size(max = 50)
     private String ice;
 
-    @OneToMany(mappedBy = "fournisseur")
+    @OneToMany(mappedBy = "fournisseur", fetch = FetchType.LAZY)
     private List<CommandeFournisseur> commandes = new ArrayList<>();
 }

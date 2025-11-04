@@ -1,7 +1,6 @@
-package com.restapi.gestion_bons.dto.stocklot;
+package com.restapi.gestion_bons.dto.Lot;
 
-import com.restapi.gestion_bons.dao.CommandeFournisseurDAO;
-import com.restapi.gestion_bons.dto.product.ProductResponseDTO;
+import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
 
 import lombok.*;
@@ -12,8 +11,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class RelationalStockLotDTO extends BaseStockLotDTO {
+public class RelationalLotDTO extends BaseLotDTO {
     // relation(s)
-    private ProductResponseDTO product;
+    private ProduitResponseDTO produit;
     private CommandeFournisseur commandeFournisseur;
 }
