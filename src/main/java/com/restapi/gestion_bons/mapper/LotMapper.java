@@ -5,8 +5,8 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.restapi.gestion_bons.dto.Lot.BaseLotDTO;
-import com.restapi.gestion_bons.dto.Lot.ResponseLotDTO;
+import com.restapi.gestion_bons.dto.lot.BaseLotDTO;
+import com.restapi.gestion_bons.dto.lot.ResponseLotDTO;
 import com.restapi.gestion_bons.entitie.Lot;
 
 @Mapper(componentModel = "spring", uses = { ProduitMapper.class })

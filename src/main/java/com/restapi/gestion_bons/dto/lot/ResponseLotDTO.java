@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.dto.Lot;
+package com.restapi.gestion_bons.dto.lot;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -9,7 +9,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class ResponseLotDTO extends RelationalLotDTO {
-    // inherits relational fields from RelationalLotDTO
     private Long produitId;
     private Long commandeFournisseurId;
 }

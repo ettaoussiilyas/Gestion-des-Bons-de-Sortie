@@ -2,7 +2,6 @@ package com.restapi.gestion_bons.controller;
 
 import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import com.restapi.gestion_bons.entitie.Lot;
-import com.restapi.gestion_bons.entitie.Produit;
 import com.restapi.gestion_bons.contracts.ProduitServiceContract;
 import com.restapi.gestion_bons.dto.produit.ProduitRequestDTO;
 
@@ -61,7 +60,7 @@ public class ProduitController {
 
     @GetMapping("/ByName/{name}")
     public ResponseEntity<ProduitResponseDTO> getByName(@PathVariable String name) {
-        return produitService.findByName(name)
+        return produitService.findByNom(name)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -75,7 +74,7 @@ public class ProduitController {
 
     @GetMapping("/ByCategory/{category}")
     public ResponseEntity<List<ProduitResponseDTO>> getByCategory(@PathVariable String category) {
-        List<ProduitResponseDTO> produits = produitService.findByCategory(category);
+        List<ProduitResponseDTO> produits = produitService.findByCategorie(category);
         if (produits.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

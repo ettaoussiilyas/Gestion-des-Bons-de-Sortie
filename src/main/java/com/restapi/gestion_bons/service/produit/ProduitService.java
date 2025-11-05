@@ -37,7 +37,7 @@ public class ProduitService implements ProduitServiceContract {
         if (dto.getReference() != null && produitDAO.findByReference(dto.getReference()) != null) {
             throw new DuplicateResourceException("reference", dto.getReference());
         }
-        if (dto.getNom() != null && produitDAO.findByName(dto.getNom()) != null) {
+        if (dto.getNom() != null && produitDAO.findByNom(dto.getNom()) != null) {
             throw new DuplicateResourceException("name", dto.getNom());
         }
         Produit p = produitMapper.toEntity(dto);
@@ -56,7 +56,7 @@ public class ProduitService implements ProduitServiceContract {
             }
             // if name changed, ensure new name is not taken
             if (dto.getNom() != null && !dto.getNom().equals(existing.getNom())) {
-                Produit byName = produitDAO.findByName(dto.getNom());
+                Produit byName = produitDAO.findByNom(dto.getNom());
                 if (byName != null && !byName.getId().equals(id)) {
                     throw new DuplicateResourceException("name", dto.getNom());
                 }
@@ -77,16 +77,16 @@ public class ProduitService implements ProduitServiceContract {
         produitDAO.deleteById(id);
     }
 
-    public Optional<ProduitResponseDTO> findByName(String name) {
-        return Optional.ofNullable(produitDAO.findByName(name)).map(produitMapper::toResponseDto);
+    public Optional<ProduitResponseDTO> findByNom(String name) {
+        return Optional.ofNullable(produitDAO.findByNom(name)).map(produitMapper::toResponseDto);
     }
 
     public Optional<ProduitResponseDTO> findByReference(String reference) {
         return Optional.ofNullable(produitDAO.findByReference(reference)).map(produitMapper::toResponseDto);
     }
 
-    public List<ProduitResponseDTO> findByCategory(String category) {
-        return produitDAO.findByCategory(category).stream().map(produitMapper::toResponseDto).toList();
+    public List<ProduitResponseDTO> findByCategorie(String category) {
+        return produitDAO.findByCategorie(category).stream().map(produitMapper::toResponseDto).toList();
     }
 
     public List<Lot> findLotsByProduitId(Long id) {

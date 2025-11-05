@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 3
-      author: marouane
+      id: create-produit-table
+      author: system
       changes:
         - createTable:
-            tableName: produits
+            tableName: produit
             columns:
               - column:
                   name: id
@@ -12,20 +12,20 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
+                    nullable: false
               - column:
                   name: reference
-                  type: VARCHAR(100)
+                  type: VARCHAR(255)
                   constraints:
-                    nullable: false
                     unique: true
               - column:
                   name: nom
                   type: VARCHAR(150)
                   constraints:
-                    nullable: false
+                    unique: true
               - column:
                   name: description
-                  type: TEXT
+                  type: VARCHAR(500)
               - column:
                   name: categorie
                   type: VARCHAR(100)

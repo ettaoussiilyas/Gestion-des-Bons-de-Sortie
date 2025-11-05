@@ -2,8 +2,8 @@ package com.restapi.gestion_bons.contracts;
 
 import java.util.List;
 
-import com.restapi.gestion_bons.dto.Lot.BaseLotDTO;
-import com.restapi.gestion_bons.dto.Lot.ResponseLotDTO;
+import com.restapi.gestion_bons.dto.lot.BaseLotDTO;
+import com.restapi.gestion_bons.dto.lot.ResponseLotDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
 
 public interface LotContract {

@@ -3,7 +3,7 @@ package com.restapi.gestion_bons.controller;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurCreateDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurUpdateDTO;
-import com.restapi.gestion_bons.service.FournisseurService;
+import com.restapi.gestion_bons.service.fournisseur.FournisseurService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

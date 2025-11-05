@@ -11,7 +11,7 @@ import com.restapi.gestion_bons.entitie.Produit;
 public interface ProduitDAO extends JpaRepository<Produit, Long> {
     Produit findByReference(String reference);
 
-    Produit findByName(String name);
+    Produit findByNom(String name);
 
-    List<Produit> findByCategory(String category);
+    List<Produit> findByCategorie(String category);
 }

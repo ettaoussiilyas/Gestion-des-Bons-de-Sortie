@@ -18,11 +18,11 @@ public interface ProduitServiceContract {
 
     void delete(Long id);
 
-    Optional<ProduitResponseDTO> findByName(String name);
+    Optional<ProduitResponseDTO> findByNom(String name);
 
     Optional<ProduitResponseDTO> findByReference(String reference);
 
-    List<ProduitResponseDTO> findByCategory(String category);
+    List<ProduitResponseDTO> findByCategorie(String category);
 
     List<Lot> findLotsByProduitId(Long id);
 }

@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.dto.Lot;
+package com.restapi.gestion_bons.dto.lot;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -13,11 +13,11 @@ import com.restapi.gestion_bons.entitie.enums.LotStatus;
 public class BaseLotDTO {
     // non-relational properties only
     private Long id;
-    private String lotNumber;
+    private String numeroLot;
     private Long produitId;
-    private LocalDateTime entryDate;
-    private Integer initialQuantity;
-    private Integer remainingQuantity;
-    private BigDecimal purchaseUnitPrice;
-    private LotStatus status;
+    private LocalDateTime dateEntree;
+    private Integer quantiteInitiale;
+    private Integer quantiteRestante;
+    private BigDecimal prixAchatUnitaire;
+    private LotStatus statut;
 }

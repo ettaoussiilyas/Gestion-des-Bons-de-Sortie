@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 
 import com.restapi.gestion_bons.contracts.LotContract;
 import com.restapi.gestion_bons.dao.LotDAO;
-import com.restapi.gestion_bons.dto.Lot.BaseLotDTO;
-import com.restapi.gestion_bons.dto.Lot.ResponseLotDTO;
+import com.restapi.gestion_bons.dto.lot.BaseLotDTO;
+import com.restapi.gestion_bons.dto.lot.ResponseLotDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
 import com.restapi.gestion_bons.entitie.Lot;
 import com.restapi.gestion_bons.mapper.LotMapper;

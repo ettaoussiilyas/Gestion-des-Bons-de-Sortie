@@ -35,3 +35,5 @@ build/
 
 ### PROPERTIES files ###
 *.properties
+
+src/main/resources/application.propertiessrc/main/resources/application.properties

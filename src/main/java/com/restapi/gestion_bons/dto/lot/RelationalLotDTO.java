@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.dto.Lot;
+package com.restapi.gestion_bons.dto.lot;
 
 import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;

@@ -1,4 +1,4 @@
-package com.restapi.gestion_bons.service;
+package com.restapi.gestion_bons.service.fournisseur;
 
 import com.restapi.gestion_bons.dao.FournisseurDAO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurCreateDTO;
