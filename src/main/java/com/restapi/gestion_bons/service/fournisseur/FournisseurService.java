@@ -6,6 +6,7 @@ import com.restapi.gestion_bons.dto.fournisseur.FournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.fournisseur.FournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.Fournisseur;
 import com.restapi.gestion_bons.mapper.FournisseurMapper;
+import com.restapi.gestion_bons.contracts.FournisseurContract;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class FournisseurService {
+public class FournisseurService implements FournisseurContract {
     private final FournisseurDAO fournisseurDAO;
     private final FournisseurMapper fournisseurMapper;
 
@@ -45,7 +46,7 @@ public class FournisseurService {
         if (!fournisseurDAO.existsById(id)) {
             throw new EntityNotFoundException("Fournisseur not found with id: " + id);
         }
-        
+
         Fournisseur toUpdate = fournisseurMapper.toEntity(updateDTO);
         toUpdate.setId(id);
         Fournisseur updated = fournisseurDAO.save(toUpdate);
