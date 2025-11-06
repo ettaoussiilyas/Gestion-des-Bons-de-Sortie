@@ -3,17 +3,14 @@ package com.restapi.gestion_bons.service.commandeFournisseur;
 import com.restapi.gestion_bons.contracts.CommandeFournisseurContract;
 import com.restapi.gestion_bons.dao.CommandeFournisseurDAO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurCreateDTO;
-import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurRequestDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
 import com.restapi.gestion_bons.mapper.CommandeFournisseurMapper;
-import com.restapi.gestion_bons.mapper.FournisseurMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,6 +71,7 @@ public class CommandeFournisseurService  implements CommandeFournisseurContract{
 
     @Override
     public List<CommandeFournisseurResponseDTO> findByFournisseurId(Long fournisseurId) {
-        return List.of();
+        return commandeFournisseurDAO.findByFournisseurId(fournisseurId).stream()
+                .map(commandeFournisseurMapper::toResponseDto).collect(Collectors.toList());
     }
 }
