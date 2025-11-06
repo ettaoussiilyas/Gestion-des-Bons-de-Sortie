@@ -3,7 +3,6 @@ package com.restapi.gestion_bons.contracts;
 import java.util.List;
 
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurCreateDTO;
-import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurRequestDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurUpdateDTO;
 

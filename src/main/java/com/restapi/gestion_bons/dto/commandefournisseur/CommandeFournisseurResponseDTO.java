@@ -1,10 +1,22 @@
 package com.restapi.gestion_bons.dto.commandefournisseur;
 
+import com.restapi.gestion_bons.entitie.Fournisseur;
+import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
+
 import lombok.*;
-import lombok.experimental.SuperBuilder;
+
+import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
-public class CommandeFournisseurResponseDTO extends RelationalCommandeFournisseurDTO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CommandeFournisseurResponseDTO {
+
+    private Long id;
+    private Date dateCommande;
+    private Double montantTotal;
+    private CommandeStatus statut;
+    private Long fournisseurId;
+
 }
