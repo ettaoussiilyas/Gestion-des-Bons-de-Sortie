@@ -24,6 +24,10 @@ public class FournisseurService implements FournisseurContract {
         this.fournisseurMapper = fournisseurMapper;
     }
 
+    public boolean existes(Long id){
+        return fournisseurDAO.existsById(id);
+    }
+
     public List<FournisseurResponseDTO> findAll() {
         return fournisseurDAO.findAll().stream()
                 .map(fournisseurMapper::toResponseDto)

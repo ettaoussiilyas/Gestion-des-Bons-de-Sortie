@@ -6,8 +6,10 @@ import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurCreat
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
+import com.restapi.gestion_bons.entitie.Fournisseur;
 import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
 import com.restapi.gestion_bons.mapper.CommandeFournisseurMapper;
+import com.restapi.gestion_bons.service.fournisseur.FournisseurService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,14 @@ public class CommandeFournisseurService  implements CommandeFournisseurContract{
 
     private final CommandeFournisseurDAO commandeFournisseurDAO;
     private final CommandeFournisseurMapper commandeFournisseurMapper;
+    private final FournisseurService fournisseurService;
 
-    public CommandeFournisseurService(CommandeFournisseurDAO commandeFournisseurDAO, CommandeFournisseurMapper commandeFournisseurMapper){
+    public CommandeFournisseurService(CommandeFournisseurDAO commandeFournisseurDAO,
+                                      CommandeFournisseurMapper commandeFournisseurMapper,
+                                      FournisseurService fournisseurService){
         this.commandeFournisseurDAO = commandeFournisseurDAO;
         this.commandeFournisseurMapper = commandeFournisseurMapper;
+        this.fournisseurService = fournisseurService;
     }
 
     @Override
@@ -34,19 +40,24 @@ public class CommandeFournisseurService  implements CommandeFournisseurContract{
 
     @Override
     public CommandeFournisseurResponseDTO update(Long id, CommandeFournisseurUpdateDTO updateDto) {
-        if(!commandeFournisseurDAO.existsById(id)){
-            throw new EntityNotFoundException("Commande Fournisseur Not Foun With This Id");
-        }
 
-        CommandeFournisseur toUpdate = commandeFournisseurMapper.toEntityUpdate(updateDto);
-        toUpdate.setId(id);
-        CommandeFournisseur update = commandeFournisseurDAO.save(toUpdate);
+        CommandeFournisseur existing = commandeFournisseurDAO.findById(id).orElseThrow(() -> new EntityNotFoundException("not found"));
+        existing.setDateCommande(updateDto.getDateCommande());
+        existing.setMontantTotal(updateDto.getMontantTotal());
+        existing.setStatut(updateDto.getStatut());
+        if(updateDto.getFournisseurId() != null){
+            Fournisseur fournisseur = new Fournisseur();
+            fournisseur.setId(updateDto.getFournisseurId());
+            existing.setFournisseur(fournisseur);
+        }
+        CommandeFournisseur update = commandeFournisseurDAO.save(existing);
         return commandeFournisseurMapper.toResponseDto(update);
     }
 
     @Override
     public CommandeFournisseurResponseDTO findById(Long id) {
 
+//        if(!commandeFournisseurDAO.existsById(id))
         return commandeFournisseurDAO.findById(id)
                 .map(commandeFournisseurMapper::toResponseDto)
                 .orElseThrow(() -> new EntityNotFoundException("Commande Fournisseur not found whit this Id !"));
@@ -72,6 +83,9 @@ public class CommandeFournisseurService  implements CommandeFournisseurContract{
 
     @Override
     public List<CommandeFournisseurResponseDTO> findByFournisseurId(Long fournisseurId) {
+        if (!fournisseurService.existes(fournisseurId)){
+            throw new EntityNotFoundException("There is no Fournisseur with this id");
+        }
         return commandeFournisseurDAO.findByFournisseurId(fournisseurId).stream()
                 .map(commandeFournisseurMapper::toResponseDto).collect(Collectors.toList());
     }
