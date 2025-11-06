@@ -80,9 +80,4 @@ public class ProduitController {
         }
         return ResponseEntity.ok(produits);
     }
-
-    @GetMapping("/{id}/stock")
-    public ResponseEntity<List<Lot>> getStockByProduitId(@PathVariable Long id) {
-        return ResponseEntity.ok(produitService.findLotsByProduitId(id));
-    }
 }

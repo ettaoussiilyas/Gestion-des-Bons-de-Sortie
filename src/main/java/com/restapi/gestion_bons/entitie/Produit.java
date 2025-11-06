@@ -40,10 +40,13 @@ public class Produit {
     @Column(name = "unite_mesure")
     private String uniteMesure;
 
+    @Column(name = "point_reapprovisionnement")
+    private Integer reorderPoint;
+
     @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
-    private List<LigneCommande> lignesCommande = new ArrayList<>();
+    private final List<LigneCommande> lignesCommande = new ArrayList<>();
 
     @OneToMany(mappedBy = "produit", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Lot> lots = new ArrayList<>();
+    private final List<Lot> lots = new ArrayList<>();
 
 }

@@ -23,6 +23,4 @@ public interface ProduitServiceContract {
     Optional<ProduitResponseDTO> findByReference(String reference);
 
     List<ProduitResponseDTO> findByCategorie(String category);
-
-    List<Lot> findLotsByProduitId(Long id);
 }

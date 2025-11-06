@@ -88,11 +88,4 @@ public class ProduitService implements ProduitServiceContract {
     public List<ProduitResponseDTO> findByCategorie(String category) {
         return produitDAO.findByCategorie(category).stream().map(produitMapper::toResponseDto).toList();
     }
-
-    public List<Lot> findLotsByProduitId(Long id) {
-        Optional<Produit> p = produitDAO.findById(id);
-        if (p.isEmpty())
-            return List.of();
-        return p.get().getLots();
-    }
 }

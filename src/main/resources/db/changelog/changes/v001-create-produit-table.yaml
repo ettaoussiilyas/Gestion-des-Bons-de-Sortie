@@ -32,3 +32,7 @@ databaseChangeLog:
               - column:
                   name: unite_mesure
                   type: VARCHAR(50)
+              - column:
+                  name: point_reapprovisionnement
+                  type: INT
+                  defaultValue: 0
