@@ -19,12 +19,10 @@ public interface LotMapper {
     @Mapping(target = "produit.id", source = "produitId")
     @Mapping(target = "commandeFournisseur.id", source = "commandeFournisseurId")
     @Mapping(target = "mouvementStock", ignore = true)
-    @Mapping(target = "bonDeSortieLignes", ignore = true)
     Lot toEntity(ResponseLotDTO dto);
 
     @Mapping(target = "produit.id", source = "produitId")
     @Mapping(target = "mouvementStock", ignore = true)
-    @Mapping(target = "bonDeSortieLignes", ignore = true)
     @Mapping(target = "commandeFournisseur", ignore = true)
     Lot toEntity(BaseLotDTO bsl);
 

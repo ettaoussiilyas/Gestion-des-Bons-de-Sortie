@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "lot")
@@ -62,6 +61,4 @@ public class Lot {
     @JoinColumn(name = "mouvement_stock_id")
     private MouvementStock mouvementStock;
 
-    @OneToMany(mappedBy = "lot", fetch = FetchType.LAZY)
-    private List<BonDeSortieLigne> bonDeSortieLignes;
 }
