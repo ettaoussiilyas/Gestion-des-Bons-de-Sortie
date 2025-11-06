@@ -6,11 +6,13 @@ import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurCreat
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
+import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
 import com.restapi.gestion_bons.mapper.CommandeFournisseurMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,4 +76,14 @@ public class CommandeFournisseurService  implements CommandeFournisseurContract{
         return commandeFournisseurDAO.findByFournisseurId(fournisseurId).stream()
                 .map(commandeFournisseurMapper::toResponseDto).collect(Collectors.toList());
     }
+
+    public CommandeFournisseurResponseDTO receptionnerCommande(Long id){
+        CommandeFournisseur commande = commandeFournisseurDAO.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Commande Not Found With This Id : " + id));
+        commande.setStatut(CommandeStatus.LIVREE);
+        CommandeFournisseur saved = commandeFournisseurDAO.save(commande);
+        return commandeFournisseurMapper.toResponseDto(saved);
+
+    }
+
 }
