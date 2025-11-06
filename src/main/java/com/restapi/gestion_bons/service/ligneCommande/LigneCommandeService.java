@@ -12,9 +12,7 @@ import com.restapi.gestion_bons.entitie.LigneCommande;
 import com.restapi.gestion_bons.entitie.Produit;
 import com.restapi.gestion_bons.mapper.LigneCommandeMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
-import com.restapi.gestion_bons.entitie.Lot;
 import com.restapi.gestion_bons.dto.produit.ProduitRequestDTO;
 
 public interface ProduitServiceContract {
@@ -23,6 +22,4 @@ public interface ProduitServiceContract {
     Optional<ProduitResponseDTO> findByReference(String reference);
 
     List<ProduitResponseDTO> findByCategorie(String category);
-
-    List<Lot> findLotsByProduitId(Long id);
 }

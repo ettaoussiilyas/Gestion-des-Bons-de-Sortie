@@ -1,6 +1,5 @@
 package com.restapi.gestion_bons.dto.commandefournisseur;
 
-import com.restapi.gestion_bons.entitie.Fournisseur;
 import com.restapi.gestion_bons.entitie.enums.CommandeStatus;
 
 import lombok.*;

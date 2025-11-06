@@ -12,14 +12,20 @@ import com.restapi.gestion_bons.entitie.Lot;
 @Mapper(componentModel = "spring", uses = { ProduitMapper.class })
 public interface LotMapper {
 
+    @Mapping(target = "commandeFournisseurId", ignore = true)
     @Mapping(target = "produitId", source = "produit.id")
     ResponseLotDTO toResponseDto(Lot lot);
 
     @Mapping(target = "produit.id", source = "produitId")
     @Mapping(target = "commandeFournisseur.id", source = "commandeFournisseurId")
+    @Mapping(target = "mouvementStock", ignore = true)
+    @Mapping(target = "bonDeSortieLignes", ignore = true)
     Lot toEntity(ResponseLotDTO dto);
 
     @Mapping(target = "produit.id", source = "produitId")
+    @Mapping(target = "mouvementStock", ignore = true)
+    @Mapping(target = "bonDeSortieLignes", ignore = true)
+    @Mapping(target = "commandeFournisseur", ignore = true)
     Lot toEntity(BaseLotDTO bsl);
 
     List<ResponseLotDTO> toResponseDtoList(List<Lot> lots);

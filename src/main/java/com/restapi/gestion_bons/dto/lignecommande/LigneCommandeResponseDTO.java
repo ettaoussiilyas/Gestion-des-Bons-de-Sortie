@@ -1,6 +1,5 @@
 package com.restapi.gestion_bons.dto.lignecommande;
 
-import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

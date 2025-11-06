@@ -10,25 +10,33 @@ import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { ProduitMapper.class })
 public interface LigneCommandeMapper {
 
+    // Existing mappings
     @Mapping(target = "commandeId", source = "commande.id")
     @Mapping(target = "produitId", source = "produit.id")
     LigneCommandeResponseDTO toResponseDto(LigneCommande ligneCommande);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "commandeId", ignore = true)
     @Mapping(target = "produit.id", ignore = true)
+    @Mapping(target = "commande", ignore = true)
     LigneCommande toEntity(LigneCommandeCreateDTO createDTO);
 
+    @Mapping(target = "commande", ignore = true)
+    @Mapping(target = "produit", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    void updateEntityFromDto(LigneCommandeUpdateDTO updateDTO, @MappingTarget LigneCommande ligneCommande);
 
-    @Mapping(target = "commandeId", source = "commande.id")
-    @Mapping(target = "produitId", source = "produit.id")
-    void updateEntityFromDto (LigneCommandeUpdateDTO updateDTO, @MappingTarget LigneCommande ligneCommande);
-
-    //List Mapping
+    // List Mapping
     List<LigneCommandeResponseDTO> toResponseDtoList(List<LigneCommande> ligneCommandes);
 
+    // Incoming mappings to add
+    @Mapping(target = "produit.id", source = "produitId")
+    @Mapping(target = "commande", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    LigneCommande toEntity(LigneCommandeUpdateDTO dto);
+
+    List<LigneCommande> toEntityList(List<LigneCommandeCreateDTO> dtos);
 
 }

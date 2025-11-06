@@ -2,9 +2,9 @@ package com.restapi.gestion_bons.contracts;
 
 import java.util.List;
 
-import com.restapi.gestion_bons.dto.bonDeSortie.BonDeSortieCreateDTO;
-import com.restapi.gestion_bons.dto.bonDeSortie.BonDeSortieResponseDTO;
-import com.restapi.gestion_bons.dto.bonDeSortie.BonDeSortieUpdateDTO;
+import com.restapi.gestion_bons.dto.bondesortie.BonDeSortieCreateDTO;
+import com.restapi.gestion_bons.dto.bondesortie.BonDeSortieResponseDTO;
+import com.restapi.gestion_bons.dto.bondesortie.BonDeSortieUpdateDTO;
 
 public interface BonDeSortieContract {
     BonDeSortieResponseDTO save(BonDeSortieCreateDTO dto);
@@ -20,4 +20,8 @@ public interface BonDeSortieContract {
     BonDeSortieResponseDTO findByNumeroBon(String numeroBon);
 
     List<BonDeSortieResponseDTO> findByAtelierId(Long atelierId);
+
+    BonDeSortieResponseDTO valider(Long id);
+
+    BonDeSortieResponseDTO annuler(Long id);
 }
