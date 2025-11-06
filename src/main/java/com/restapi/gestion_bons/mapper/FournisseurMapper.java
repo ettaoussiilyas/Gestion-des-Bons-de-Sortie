@@ -6,7 +6,7 @@ import com.restapi.gestion_bons.dto.fournisseur.FournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.Fournisseur;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = { FournisseurMapper.class })
+@Mapper(componentModel = "spring")
 public interface FournisseurMapper {
 
 
