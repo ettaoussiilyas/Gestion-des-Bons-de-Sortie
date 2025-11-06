@@ -1,18 +1,13 @@
 package com.restapi.gestion_bons.dto.atelier;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AtelierCreateDTO {
-
+    @NotBlank(message = "Le nom de l'atelier est obligatoire")
     private String nom;
-
 }
