@@ -18,9 +18,9 @@ public interface LigneCommandeMapper {
     LigneCommandeResponseDTO toResponseDto(LigneCommande ligneCommande);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "commandeId", source = "commande.id")
-    @Mapping(target = "produit.id", source = "produitId")
-    LigneCommandeResponseDTO toEntity(LigneCommandeCreateDTO createDTO);
+    @Mapping(target = "commandeId", ignore = true)
+    @Mapping(target = "produit.id", ignore = true)
+    LigneCommande toEntity(LigneCommandeCreateDTO createDTO);
 
 
     @Mapping(target = "commandeId", source = "commande.id")
