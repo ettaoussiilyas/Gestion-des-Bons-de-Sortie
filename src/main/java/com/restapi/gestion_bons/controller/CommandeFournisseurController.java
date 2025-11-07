@@ -5,6 +5,7 @@ import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurRespo
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurUpdateDTO;
 import com.restapi.gestion_bons.mapper.CommandeFournisseurMapper;
 import com.restapi.gestion_bons.service.commandeFournisseur.CommandeFournisseurService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class CommandeFournisseurController {
 
     private final CommandeFournisseurService commandeFournisseurService;
 
-    public CommandeFournisseurController(CommandeFournisseurService commandeFournisseurService, CommandeFournisseurMapper commandeFournisseurMapper) {
+    public CommandeFournisseurController(CommandeFournisseurService commandeFournisseurService) {
         this.commandeFournisseurService = commandeFournisseurService;
     }
 
@@ -35,7 +36,7 @@ public class CommandeFournisseurController {
 
     @PostMapping
     public ResponseEntity<CommandeFournisseurResponseDTO> createCommandeFournisseur(
-            @RequestBody
+            @RequestBody @Valid
             CommandeFournisseurCreateDTO createDTO){
         CommandeFournisseurResponseDTO created = commandeFournisseurService.save(createDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -44,7 +45,7 @@ public class CommandeFournisseurController {
     @PutMapping("/{id}")
     public ResponseEntity<CommandeFournisseurResponseDTO> updateCommandeFournisseur(
             @PathVariable Long id,
-            @RequestBody CommandeFournisseurUpdateDTO fournisseurUpdateDTO
+            @Valid @RequestBody CommandeFournisseurUpdateDTO fournisseurUpdateDTO
             ){
         CommandeFournisseurResponseDTO updated = commandeFournisseurService.update(id, fournisseurUpdateDTO);
         return ResponseEntity.ok(updated);

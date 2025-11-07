@@ -14,4 +14,5 @@ public interface LotDAO extends JpaRepository<Lot, Long> {
     List<Lot> findByProduitIdAndStatutOrderByDateEntreeAsc(Long produitId, LotStatus statut);
 
     List<Lot> findByStatut(LotStatus statut);
+
 }

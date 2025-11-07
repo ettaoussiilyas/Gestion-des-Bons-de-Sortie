@@ -56,6 +56,7 @@ public class LigneCommandeService implements LigneCommandeContract {
         ligneCommande.setProduit(produit);
 
         LigneCommande saved = ligneCommandeDAO.save(ligneCommande);
+
         return ligneCommandeMapper.toResponseDto(saved);
     }
 
