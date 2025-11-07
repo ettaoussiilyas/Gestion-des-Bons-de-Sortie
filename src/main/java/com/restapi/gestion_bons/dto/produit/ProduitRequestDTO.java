@@ -33,4 +33,7 @@ public class ProduitRequestDTO {
 
     @NotBlank(message = "L'unité de mesure est obligatoire")
     private String uniteMesure;
+
+    @NotBlank(message = "Le point de réapprovisionnement est obligatoire")
+    private Integer reorderPoint;
 }

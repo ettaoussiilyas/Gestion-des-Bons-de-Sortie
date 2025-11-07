@@ -1,7 +1,6 @@
 package com.restapi.gestion_bons.controller;
 
 import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
-import com.restapi.gestion_bons.entitie.Lot;
 import com.restapi.gestion_bons.contracts.ProduitServiceContract;
 import com.restapi.gestion_bons.dto.produit.ProduitRequestDTO;
 
@@ -79,10 +78,5 @@ public class ProduitController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(produits);
-    }
-
-    @GetMapping("/{id}/stock")
-    public ResponseEntity<List<Lot>> getStockByProduitId(@PathVariable Long id) {
-        return ResponseEntity.ok(produitService.findLotsByProduitId(id));
     }
 }

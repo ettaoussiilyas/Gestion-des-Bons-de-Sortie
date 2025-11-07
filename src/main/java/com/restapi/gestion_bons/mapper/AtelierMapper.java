@@ -6,25 +6,26 @@ import com.restapi.gestion_bons.dto.atelier.AtelierUpdateDTO;
 import com.restapi.gestion_bons.entitie.Atelier;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AtelierMapper {
 
-    // Entity response DTO
     AtelierResponseDTO toResponseDto(Atelier atelier);
 
-    // Create dto to entity
     @Mapping(target = "id", ignore = true)
-    Atelier toEntity(AtelierCreateDTO createDTO);
+    @Mapping(target = "bonDeSorties", ignore = true)
+    Atelier toEntity(AtelierCreateDTO dto);
 
-    // Update dto to entity
     @Mapping(target = "id", ignore = true)
-    void updateEntityFromDto(AtelierUpdateDTO updateDTO, @MappingTarget Atelier atelier);
+    @Mapping(target = "bonDeSorties", ignore = true)
+    Atelier toEntity(AtelierUpdateDTO dto);
 
-    // List mapping
-    List<AtelierResponseDTO> toResponseDtoList(List<Atelier> atelier);
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "bonDeSorties", ignore = true)
+    Atelier toEntity(AtelierResponseDTO dto);
+
+    List<AtelierResponseDTO> toResponseDtoList(List<Atelier> ateliers);
 
 }

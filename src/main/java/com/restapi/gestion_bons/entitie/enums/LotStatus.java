@@ -1,9 +1,9 @@
 package com.restapi.gestion_bons.entitie.enums;
 
 public enum LotStatus {
-    /** Lot is active and has available quantity */
-    ACTIVE,
+    /** Lot is available and has available quantity */
+    DISPONIBLE,
 
     /** Lot is completely consumed */
-    DEPLETED,
+    EPUISE,
 }

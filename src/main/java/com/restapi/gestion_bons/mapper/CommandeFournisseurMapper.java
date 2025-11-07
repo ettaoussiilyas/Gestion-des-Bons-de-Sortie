@@ -4,10 +4,14 @@ import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurCreat
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurResponseDTO;
 import com.restapi.gestion_bons.dto.commandefournisseur.CommandeFournisseurUpdateDTO;
 import com.restapi.gestion_bons.entitie.CommandeFournisseur;
+
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {CommandeFournisseurMapper.class})
+@Mapper(componentModel = "spring", uses = { FournisseurMapper.class,
+        LigneCommandeMapper.class })
 public interface CommandeFournisseurMapper {
 
     @Mapping(target = "fournisseurId", source = "fournisseur.id")
@@ -29,5 +33,11 @@ public interface CommandeFournisseurMapper {
     @Mapping(target = "lots", ignore = true)
     CommandeFournisseur toEntityUpdate(CommandeFournisseurUpdateDTO updateDTO);
 
+    @Mapping(target = "lignesCommande", ignore = true)
+    @Mapping(target = "fournisseur", ignore = true)
+    @Mapping(target = "lots", ignore = true)
     CommandeFournisseur toEntityResponse(CommandeFournisseurResponseDTO responseDTO);
+
+    List<CommandeFournisseurResponseDTO> toResponseDtoList(List<CommandeFournisseur> commandes);
+
 }

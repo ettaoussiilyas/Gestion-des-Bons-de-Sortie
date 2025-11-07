@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.restapi.gestion_bons.contracts.ProduitServiceContract;
 import com.restapi.gestion_bons.dao.ProduitDAO;
-import com.restapi.gestion_bons.entitie.Lot;
 import com.restapi.gestion_bons.entitie.Produit;
 import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import com.restapi.gestion_bons.dto.produit.ProduitRequestDTO;
@@ -87,12 +86,5 @@ public class ProduitService implements ProduitServiceContract {
 
     public List<ProduitResponseDTO> findByCategorie(String category) {
         return produitDAO.findByCategorie(category).stream().map(produitMapper::toResponseDto).toList();
-    }
-
-    public List<Lot> findLotsByProduitId(Long id) {
-        Optional<Produit> p = produitDAO.findById(id);
-        if (p.isEmpty())
-            return List.of();
-        return p.get().getLots();
     }
 }
