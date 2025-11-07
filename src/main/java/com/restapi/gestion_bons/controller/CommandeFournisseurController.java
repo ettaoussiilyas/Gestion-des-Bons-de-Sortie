@@ -37,7 +37,6 @@ public class CommandeFournisseurController {
     public ResponseEntity<CommandeFournisseurResponseDTO> createCommandeFournisseur(
             @RequestBody
             CommandeFournisseurCreateDTO createDTO){
-//        return ResponseEntity.ok(commandeFournisseurService.save(createDTO));
         CommandeFournisseurResponseDTO created = commandeFournisseurService.save(createDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }

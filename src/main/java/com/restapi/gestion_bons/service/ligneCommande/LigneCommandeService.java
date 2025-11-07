@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,13 +82,12 @@ public class LigneCommandeService implements LigneCommandeContract {
     }
 
     @Override
-    public LigneCommandeResponseDTO findById(Long id) {
+    public Optional<LigneCommandeResponseDTO> findById(Long id) {
         if (id == null || id <= 0){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id not Valid");
-        }
+       }
         return ligneCommandeDAO.findById(id)
-                .map(ligneCommandeMapper::toResponseDto)
-                .orElseThrow(() -> new EntityNotFoundException("Pas de ligne de commande avec cette id !"));
+                .map(ligneCommandeMapper::toResponseDto);
 
     }
 

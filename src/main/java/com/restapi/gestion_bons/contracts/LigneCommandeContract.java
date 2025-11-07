@@ -5,6 +5,7 @@ import com.restapi.gestion_bons.dto.lignecommande.LigneCommandeResponseDTO;
 import com.restapi.gestion_bons.dto.lignecommande.LigneCommandeUpdateDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LigneCommandeContract {
 
@@ -12,7 +13,7 @@ public interface LigneCommandeContract {
 
     LigneCommandeResponseDTO update(Long id, LigneCommandeUpdateDTO updateDTO);
 
-    LigneCommandeResponseDTO findById(Long id);
+    Optional<LigneCommandeResponseDTO> findById(Long id);
 
     List<LigneCommandeResponseDTO> findAll();
 

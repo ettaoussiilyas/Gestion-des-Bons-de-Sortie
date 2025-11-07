@@ -18,7 +18,7 @@ cd Gestion-des-Bons-de-Sortie
 Copy the example file and update with your credentials:
 
 ```bash
-cp src/main/resources/application.properties.example src/main/resources/application.properties
+cp src/main/resources/application.properties src/main/resources/application.properties
 ```
 
 Edit `application.properties` and replace:
