@@ -12,13 +12,12 @@ import com.restapi.gestion_bons.entitie.LigneCommande;
 import com.restapi.gestion_bons.entitie.Produit;
 import com.restapi.gestion_bons.mapper.LigneCommandeMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LigneCommandeService implements LigneCommandeContract {
@@ -94,11 +93,49 @@ public class LigneCommandeService implements LigneCommandeContract {
 
     @Override
     public List<LigneCommandeResponseDTO> findAll() {
-        return List.of();
+        List<LigneCommande> ligneCommandes= ligneCommandeDAO.findAll();
+        if (ligneCommandes.isEmpty()){
+            throw new EntityNotFoundException("There is no Ligne de Commandes");
+        }
+        return ligneCommandeMapper.toResponseDtoList(ligneCommandes);
     }
 
     @Override
     public void delete(Long id) {
+        if (!ligneCommandeDAO.existsById(id)){
+            throw new EntityNotFoundException("No ligne de commande avec cette id !");
+        }
+        ligneCommandeDAO.deleteById(id);
 
+    }
+
+    public List<LigneCommandeResponseDTO> getLigneCommandeByProduitId(Long id){
+        if(!produitDAO.existsById(id)){
+            throw new EntityNotFoundException("There is no Produt with is id");
+        }
+
+        List<LigneCommandeResponseDTO> dtos =  ligneCommandeDAO.findLigneCommandeByProduit_Id(id)
+                .stream()
+                .map(ligneCommandeMapper::toResponseDto)
+                .toList();
+        if (dtos.isEmpty()){
+            throw new EntityNotFoundException("There is no Ligne Commande with this product id");
+        }
+        return dtos;
+    }
+
+    public List<LigneCommandeResponseDTO> getLigneCommandeByFournisseurCommandeId(Long id){
+        if(!commandeFournisseurDAO.existsById(id)){
+            throw new EntityNotFoundException("There is no Commande Fournisseur with is id");
+        }
+
+        List<LigneCommandeResponseDTO> dtos = ligneCommandeDAO.findLigneCommandeByCommande_Fournisseur_Id(id)
+                .stream()
+                .map(ligneCommandeMapper::toResponseDto)
+                .toList();
+        if (dtos.isEmpty()){
+            throw new EntityNotFoundException("There is no Ligne Commande with this commande fournisseur id");
+        }
+        return dtos;
     }
 }
