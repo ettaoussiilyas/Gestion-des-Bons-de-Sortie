@@ -74,4 +74,12 @@ public class CommandeFournisseurController {
         CommandeFournisseurResponseDTO commandeFournisseur = commandeFournisseurService.receptionnerCommande(id);
         return ResponseEntity.ok(commandeFournisseur);
     }
+
+    @PutMapping("/{id}/valide")
+    public ResponseEntity<CommandeFournisseurResponseDTO> valideCommande(
+            @PathVariable Long id
+    ){
+        CommandeFournisseurResponseDTO commandeFournisseur = commandeFournisseurService.valideCommande(id);
+        return ResponseEntity.ok(commandeFournisseur);
+    }
 }

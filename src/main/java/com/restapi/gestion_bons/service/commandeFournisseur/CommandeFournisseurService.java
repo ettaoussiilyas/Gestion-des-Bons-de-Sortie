@@ -157,4 +157,17 @@ public class CommandeFournisseurService  implements CommandeFournisseurContract{
         CommandeFournisseur saved = commandeFournisseurDAO.save(commande);
         return commandeFournisseurMapper.toResponseDto(saved);
     }
+
+    public CommandeFournisseurResponseDTO valideCommande(Long id){
+        CommandeFournisseur commande = commandeFournisseurDAO.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Commande not found"));
+
+        if (commande.getStatut() != CommandeStatus.EN_ATTENTE) {
+            throw new IllegalStateException("Can only receive EN_ATTENTE orders");
+        }
+
+        commande.setStatut(CommandeStatus.VALIDEE);
+        commandeFournisseurDAO.save(commande);
+        return commandeFournisseurMapper.toResponseDto(commande);
+    }
 }
