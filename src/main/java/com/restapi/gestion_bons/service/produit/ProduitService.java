@@ -1,5 +1,6 @@
 package com.restapi.gestion_bons.service.produit;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +91,7 @@ public class ProduitService implements ProduitServiceContract {
         return produitDAO.findByCategorie(category).stream().map(produitMapper::toResponseDto).toList();
     }
 
+//    @PostConstruct
     public List<ProduitResponseDTO> initDB(){
         List<ProduitRequestDTO> produits = IntStream.rangeClosed(1, 200)
                 .mapToObj(i -> ProduitRequestDTO.builder()
