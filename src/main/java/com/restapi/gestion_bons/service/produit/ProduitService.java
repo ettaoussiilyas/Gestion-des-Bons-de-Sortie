@@ -2,6 +2,7 @@ package com.restapi.gestion_bons.service.produit;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.restapi.gestion_bons.contracts.ProduitServiceContract;
@@ -14,6 +15,7 @@ import com.restapi.gestion_bons.mapper.ProduitMapper;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -27,6 +29,12 @@ public class ProduitService implements ProduitServiceContract {
     private final ProduitDAO produitDAO;
     private final ProduitMapper produitMapper;
 
+    @Override
+    public Page<ProduitResponseDTO> findAllWithPagination(Pageable pageable) {
+        return produitDAO.findAll(pageable).map(produitMapper::toResponseDto);
+    }
+
+    @Override
     public List<ProduitResponseDTO> findAll() {
         return produitDAO.findAll().stream().map(produitMapper::toResponseDto).toList();
     }

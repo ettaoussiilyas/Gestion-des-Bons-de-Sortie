@@ -13,6 +13,10 @@ Content-Type: application/json
 ### List all produits
 GET http://localhost:8080/api/v1/produits
 
+### List all produits with pagination
+GET http://localhost:8080/api/v1/produits/paginated?page=0&size=10
+
+
 ### Get produit by id
 GET http://localhost:8080/api/v1/produits/1
 

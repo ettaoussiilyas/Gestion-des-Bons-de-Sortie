@@ -4,6 +4,8 @@ import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import com.restapi.gestion_bons.contracts.ProduitServiceContract;
 import com.restapi.gestion_bons.dto.produit.ProduitRequestDTO;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,12 @@ public class ProduitController {
     @GetMapping
     public List<ProduitResponseDTO> listAll() {
         return produitService.findAll();
+    }
+
+    @GetMapping("/paginated")  // ✅ Add pagination endpoint
+    public ResponseEntity<Page<ProduitResponseDTO>> listAllPaginated(Pageable pageable) {
+        Page<ProduitResponseDTO> produits = produitService.findAllWithPagination(pageable);
+        return ResponseEntity.ok(produits);
     }
 
     @GetMapping("/{id}")

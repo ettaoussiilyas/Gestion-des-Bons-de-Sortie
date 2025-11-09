@@ -5,8 +5,12 @@ import java.util.Optional;
 
 import com.restapi.gestion_bons.dto.produit.ProduitResponseDTO;
 import com.restapi.gestion_bons.dto.produit.ProduitRequestDTO;
+import org.springframework.data.domain.*;
 
 public interface ProduitServiceContract {
+
+    Page<ProduitResponseDTO> findAllWithPagination(Pageable pageable);
+
     List<ProduitResponseDTO> findAll();
 
     Optional<ProduitResponseDTO> findById(Long id);
