@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 @Service
 @Primary
@@ -86,5 +88,22 @@ public class ProduitService implements ProduitServiceContract {
 
     public List<ProduitResponseDTO> findByCategorie(String category) {
         return produitDAO.findByCategorie(category).stream().map(produitMapper::toResponseDto).toList();
+    }
+
+    public List<ProduitResponseDTO> initDB(){
+        List<ProduitRequestDTO> produits = IntStream.rangeClosed(1, 200)
+                .mapToObj(i -> ProduitRequestDTO.builder()
+                        .reference("REF-" + String.format("%03d", i))
+                        .nom("Produit " + i)
+                        .description("Description du produit " + i)
+                        .categorie("Categorie " + (i % 5 + 1))
+                        .uniteMesure("PIECE")
+                        .reorderPoint(new Random().nextInt(50) + 10)
+                        .build())
+                .toList();
+
+        return produits.stream()
+                .map(this::save)
+                .toList();
     }
 }

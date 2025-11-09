@@ -43,3 +43,5 @@ GET http://localhost:8080/api/v1/produits/ByReference/REF-001
 ### Get stock lots for a produit
 GET http://localhost:8080/api/v1/produits/1/stock
 
+### Init DB
+POST http://localhost:8080/api/v1/produits/initdb

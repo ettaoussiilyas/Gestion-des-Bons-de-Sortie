@@ -79,4 +79,9 @@ public class ProduitController {
         }
         return ResponseEntity.ok(produits);
     }
+
+    @PostMapping("/initdb")
+    public ResponseEntity<List<ProduitResponseDTO>> initDb(){
+        return ResponseEntity.ok(produitService.initDB());
+    }
 }

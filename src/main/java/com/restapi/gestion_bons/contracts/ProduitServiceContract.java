@@ -22,4 +22,6 @@ public interface ProduitServiceContract {
     Optional<ProduitResponseDTO> findByReference(String reference);
 
     List<ProduitResponseDTO> findByCategorie(String category);
+
+    List<ProduitResponseDTO> initDB();
 }
