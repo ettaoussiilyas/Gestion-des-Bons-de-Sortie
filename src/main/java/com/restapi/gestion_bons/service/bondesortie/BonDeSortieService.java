@@ -173,7 +173,8 @@ public class BonDeSortieService implements BonDeSortieContract {
         return bonDeSortieMapper.toResponseDto(cancelled);
     }
 
-    private void traiterSortieFIFO(BonDeSortieLigne ligne, BonDeSortie bonDeSortie) {
+    @Override
+    public void traiterSortieFIFO(BonDeSortieLigne ligne, BonDeSortie bonDeSortie) {
         Produit produit = ligne.getProduit();
         int quantiteRestante = ligne.getQuantiteDemandee();
 
