@@ -30,6 +30,7 @@ public class BonDeSortieService implements BonDeSortieContract {
     private final LotDAO lotDAO;
     private final MouvementStockDAO mouvementStockDAO;
     private final BonDeSortieMapper bonDeSortieMapper;
+    private final BonDeSortieLigneDAO bonDeSortieLigneDAO;
 
     @Override
     public BonDeSortieResponseDTO save(BonDeSortieCreateDTO dto) {
@@ -50,7 +51,7 @@ public class BonDeSortieService implements BonDeSortieContract {
                     Produit produit = produitDAO.findById(ligneDTO.getProduitId())
                             .orElseThrow(() -> new EntityNotFoundException(
                                     "Produit non trouvé avec l'id: " + ligneDTO.getProduitId()));
-
+                    System.out.println("-------------------------------------" + produit.getId());
                     return BonDeSortieLigne.builder()
                             .bonDeSortie(bonDeSortie)
                             .produit(produit)
@@ -60,8 +61,11 @@ public class BonDeSortieService implements BonDeSortieContract {
                 .collect(Collectors.toList());
 
         bonDeSortie.setBonDeSortieLignes(lignes);
-
+        lignes.forEach(
+                ligne -> ligne.setBonDeSortie(bonDeSortie)
+        );
         BonDeSortie saved = bonDeSortieDAO.save(bonDeSortie);
+        bonDeSortieLigneDAO.saveAll(lignes);
         return bonDeSortieMapper.toResponseDto(saved);
     }
 
