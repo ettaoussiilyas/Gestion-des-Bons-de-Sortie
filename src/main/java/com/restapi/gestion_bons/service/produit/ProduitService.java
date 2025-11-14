@@ -116,4 +116,17 @@ public class ProduitService implements ProduitServiceContract {
                 .map(this::save)
                 .toList();
     }
+
+    public List<ProduitResponseDTO> done(String category, Double taux){
+        return  produitDAO.findAll()
+                .stream()
+                .filter(produit -> produit.getCategorie().equals(category))
+                .map(produit -> {
+                    Integer number = (int) (produit.getReorderPoint() + produit.getReorderPoint()*taux);
+                    produit.setReorderPoint(number);
+                    return produit;
+                })
+                .map(produitMapper::toResponseDto)
+                .toList();
+    }
 }
