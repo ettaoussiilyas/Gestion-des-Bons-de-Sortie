@@ -1,0 +1,59 @@
+### Search mouvements par Id
+GET http://localhost:8080/api/v1/stock/search?id=5
+
+### Search mouvements par type (ENTREE/SORTIE)
+GET http://localhost:8080/api/v1/stock/search?typeMouvement=ENTREE
+
+### Search mouvements par date exacte
+GET http://localhost:8080/api/v1/stock/search?dateMouvement=2024-01-15T10:30:00
+
+### Search mouvements par range des dates
+GET http://localhost:8080/api/v1/stock/search?startDateMouvement=2024-01-01T00:00:00&endDateMouvement=2024-01-31T23:59:59
+
+### Search mouvements par quantite exacte
+GET http://localhost:8080/api/v1/stock/search?quantite=100
+
+### Search mouvements par rande des quanttites
+GET http://localhost:8080/api/v1/stock/search?minQuantite=50&maxQuantite=200
+
+### Search mouvements par price unitaire
+GET http://localhost:8080/api/v1/stock/search?prixUnitaireLot=25.50
+
+### Search mouvements par produit Id
+GET http://localhost:8080/api/v1/stock/search?produitId=3
+
+### Search mouvements par lot id
+GET http://localhost:8080/api/v1/stock/search?lotId=8
+
+### Search mouvements par bon de sortie Id
+GET http://localhost:8080/api/v1/stock/search?bonDeSortieId=12
+
+### Search avec multi criteria
+GET http://localhost:8080/api/v1/stock/search?typeMouvement=ENTREE&produitId=3&minQuantite=10
+
+### Search par date range and type
+GET http://localhost:8080/api/v1/stock/search?typeMouvement=SORTIE&startDateMouvement=2024-01-01T00:00:00&endDateMouvement=2024-01-15T23:59:59
+
+### Search par product et quantity range
+GET http://localhost:8080/api/v1/stock/search?produitId=5&minQuantite=20&maxQuantite=100
+
+### Complex search combination
+GET http://localhost:8080/api/v1/stock/search?typeMouvement=ENTREE&produitId=3&lotId=8&minQuantite=50&startDateMouvement=2024-01-01T00:00:00
+
+### Get all mouvements (empty search)
+GET http://localhost:8080/api/v1/stock/search
+
+### Test invalid type mouvement (should return error)
+GET http://localhost:8080/api/v1/stock/search?typeMouvement=INVALID_TYPE
+
+### Test partial date range
+GET http://localhost:8080/api/v1/stock/search?startDateMouvement=2024-01-01T00:00:00
+
+### Test partial date range
+GET http://localhost:8080/api/v1/stock/search?endDateMouvement=2024-01-31T23:59:59
+
+### Test partial quantity range
+GET http://localhost:8080/api/v1/stock/search?minQuantite=10
+
+### Test partial quantity range
+GET http://localhost:8080/api/v1/stock/search?maxQuantite=100

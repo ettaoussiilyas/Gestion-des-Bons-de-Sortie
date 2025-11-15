@@ -10,15 +10,20 @@ import com.restapi.gestion_bons.dto.stock.StockProduitDetailDTO;
 import com.restapi.gestion_bons.dto.stock.StockValorisationDTO;
 import com.restapi.gestion_bons.dto.mouvementstock.MouvementStockResponseDTO;
 import com.restapi.gestion_bons.entitie.Lot;
+import com.restapi.gestion_bons.entitie.MouvementStock;
 import com.restapi.gestion_bons.entitie.Produit;
 import com.restapi.gestion_bons.entitie.enums.LotStatus;
+import com.restapi.gestion_bons.entitie.enums.TypeMouvement;
 import com.restapi.gestion_bons.mapper.MouvementStockMapper;
+import com.restapi.gestion_bons.specification.MouvementStockSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -182,4 +187,58 @@ public class StockService implements StockContract {
                         .multiply(BigDecimal.valueOf(lot.getQuantiteRestante())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    @Override
+    public List<MouvementStockResponseDTO> search(
+            Long id,
+            String typeMouvement,
+            LocalDateTime dateMouvement,
+            LocalDateTime startDateMouvement,
+            LocalDateTime endDateMouvement,
+            Integer quantite,
+            Integer minQuantite,
+            Integer maxQuantite,
+            Double prixUnitaireLot,
+            Long produitId,
+            Long lotId,
+            Long bonDeSortieId
+    ){
+//        Specification<MouvementStock> spec = Specification.where(null); // not existe
+        Specification<MouvementStock> spec = ((root, query, criteriaBuilder) -> null);
+        // we must to adding filter anly when parameters are provided
+        if(id != null) spec = spec.and(MouvementStockSpecification.hasId(id));
+
+        if (typeMouvement != null){
+            try {
+                TypeMouvement type = TypeMouvement.valueOf(typeMouvement);
+                spec = spec.and(MouvementStockSpecification.hasTypeMouvement(type));
+            }catch (IllegalArgumentException e){
+                throw new IllegalArgumentException("Type de mouvement non valide" + e);
+            }
+        }
+
+        if(dateMouvement != null){
+            spec = spec.and(MouvementStockSpecification.hasDateMouvement(dateMouvement));
+        }else if(startDateMouvement != null && endDateMouvement != null){
+            spec = spec.and(MouvementStockSpecification.dateMouvementBetween(startDateMouvement, endDateMouvement));
+        }
+
+        if(quantite != null){
+            spec = spec.and(MouvementStockSpecification.hasQantite(quantite));
+        }else if(minQuantite != null && maxQuantite != null){
+            spec = spec.and(MouvementStockSpecification.quantityBetween(minQuantite, maxQuantite));
+        }
+
+        if (prixUnitaireLot != null) spec = spec.and(MouvementStockSpecification.hasPrixUnitaireLot(prixUnitaireLot));
+
+        if (produitId != null) spec = spec.and(MouvementStockSpecification.hasProduit(produitId));
+        if (lotId != null) spec = spec.and(MouvementStockSpecification.hasLot(lotId));
+        if (bonDeSortieId != null) spec = spec.and(MouvementStockSpecification.hasBonDeSortie(bonDeSortieId));
+
+        return mouvementStockDAO.findAll(spec)
+                .stream()
+                .map(mouvementStockMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
 }

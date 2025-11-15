@@ -4,9 +4,13 @@ import com.restapi.gestion_bons.contracts.StockContract;
 import com.restapi.gestion_bons.dto.mouvementstock.MouvementStockResponseDTO;
 import com.restapi.gestion_bons.dto.stock.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -44,5 +48,49 @@ public class StockController {
     @GetMapping("/valorisation")
     public ResponseEntity<StockValorisationDTO> getValorisation() {
         return ResponseEntity.ok(stockService.getValorisation());
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<MouvementStockResponseDTO>> search(
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String typeMouvement,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateMouvement,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDateMouvement,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDateMouvement,
+            @RequestParam(required = false) Integer quantite,
+            @RequestParam(required = false) Integer minQuantite,
+            @RequestParam(required = false) Integer maxQuantite,
+            @RequestParam(required = false) Double prixUnitaireLot,
+            @RequestParam(required = false) Long produitId,
+            @RequestParam(required = false) Long lotId,
+            @RequestParam(required = false) Long bonDeSortieId
+    ){
+        if (dateMouvement != null && (startDateMouvement != null || endDateMouvement != null)) {
+            throw new RuntimeException("on peus pas trouver une recherche avec une date spesific et une authre entre deux dates");
+//            return ResponseEntity.badRequest().body(null);
+        }
+
+        if (quantite != null && (minQuantite != null || maxQuantite != null)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "on peus pas trouver une recherche avec une quantite spesific et une authre entre deux valeur"
+            );
+//            throw new RuntimeException("on peus pas trouver une recherche avec une quantite spesific et une authre entre deux valeur");
+            //            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(stockService.search(
+                id,
+                typeMouvement,
+                dateMouvement,
+                startDateMouvement,
+                endDateMouvement,
+                quantite,
+                minQuantite,
+                maxQuantite,
+                prixUnitaireLot,
+                produitId,
+                lotId,
+                bonDeSortieId)
+        );
     }
 }
