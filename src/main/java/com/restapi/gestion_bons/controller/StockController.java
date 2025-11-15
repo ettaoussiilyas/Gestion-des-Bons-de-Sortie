@@ -30,7 +30,7 @@ public class StockController {
         return ResponseEntity.ok(stockService.getStockByProduitId(id));
     }
 
-    @GetMapping("/mouvements")
+    @GetMapping("/mouvements-all")
     public ResponseEntity<List<MouvementStockResponseDTO>> getMouvements() {
         return ResponseEntity.ok(stockService.getMouvements());
     }
@@ -66,7 +66,11 @@ public class StockController {
             @RequestParam(required = false) Long bonDeSortieId
     ){
         if (dateMouvement != null && (startDateMouvement != null || endDateMouvement != null)) {
-            throw new RuntimeException("on peus pas trouver une recherche avec une date spesific et une authre entre deux dates");
+//            throw new RuntimeException("on peus pas trouver une recherche avec une date spesific et une authre entre deux dates");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "on peus pas trouver une recherche avec une date spesific et une authre entre deux dates"
+            );
 //            return ResponseEntity.badRequest().body(null);
         }
 
@@ -92,5 +96,19 @@ public class StockController {
                 lotId,
                 bonDeSortieId)
         );
+    }
+
+    // -------------------- Task 2.2 -------------------------------
+
+    @GetMapping("/mouvements")
+    public ResponseEntity<List<MouvementStockResponseDTO>> getMouvements(
+            @RequestParam(required = false) String typeMouvement,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+            @RequestParam(required = false) Long produitId,
+            @RequestParam(required = false) String produitReference) {
+
+        return ResponseEntity.ok(stockService.getMouvementsWithFilters(
+                typeMouvement, startDate, endDate, produitId, produitReference));
     }
 }

@@ -34,4 +34,12 @@ public interface StockContract {
             Long bonDeSortieId
     );
 
+    List<MouvementStockResponseDTO> getMouvementsWithFilters(
+            String typeMouvement,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            Long produitId,
+            String produitReference
+    );
+
 }

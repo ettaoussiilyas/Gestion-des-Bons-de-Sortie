@@ -84,7 +84,10 @@ public class MouvementStockSpecification {
 
 
 
-
+    public static Specification<MouvementStock> hasProduitReference(String reference){
+        return (root, query, criteriaBuilder) ->
+                reference == null ? null : criteriaBuilder.equal(root.get("produit").get("reference"), reference);
+    }
 
 
 

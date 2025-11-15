@@ -241,4 +241,42 @@ public class StockService implements StockContract {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<MouvementStockResponseDTO> getMouvementsWithFilters(
+            String typeMouvement,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            Long produitId,
+            String produitReference) {
+
+        Specification<MouvementStock> spec = (root, query, criteriaBuilder) -> null;
+
+        if (typeMouvement != null) {
+            try {
+                TypeMouvement type = TypeMouvement.valueOf(typeMouvement);
+                spec = spec.and(MouvementStockSpecification.hasTypeMouvement(type));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Type de mouvement non valide: " + typeMouvement);
+            }
+        }
+
+        if (startDate != null && endDate != null) {
+            spec = spec.and(MouvementStockSpecification.dateMouvementBetween(startDate, endDate));
+        }
+
+        if (produitId != null) {
+            spec = spec.and(MouvementStockSpecification.hasProduit(produitId));
+        }
+
+        if (produitReference != null) {
+            spec = spec.and(MouvementStockSpecification.hasProduitReference(produitReference));
+        }
+
+        return mouvementStockDAO.findAll(spec)
+                .stream()
+                .map(mouvementStockMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
 }

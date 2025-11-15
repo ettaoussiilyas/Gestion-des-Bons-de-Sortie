@@ -57,3 +57,17 @@ GET http://localhost:8080/api/v1/stock/search?minQuantite=10
 
 ### Test partial quantity range
 GET http://localhost:8080/api/v1/stock/search?maxQuantite=100
+
+
+
+### TASK 2.2 : GET /api/v1/stock/mouvements with all required filters
+GET http://localhost:8080/api/v1/stock/mouvements?typeMouvement=ENTREE&startDate=2024-01-01T00:00:00&endDate=2024-01-31T23:59:59&produitId=1
+
+### With product reference
+GET http://localhost:8080/api/v1/stock/mouvements?produitReference=PROD-001&typeMouvement=SORTIE
+
+### Combined filters
+GET http://localhost:8080/api/v1/stock/mouvements?startDate=2024-01-01T00:00:00&endDate=2024-01-15T23:59:59&produitId=1&typeMouvement=ENTREE
+
+### Simple get all (backward compatible)
+GET http://localhost:8080/api/v1/stock/mouvements
