@@ -148,7 +148,7 @@ public class BonDeSortieService implements BonDeSortieContract {
                 .orElseThrow(() -> new EntityNotFoundException("Bon de sortie non trouvé avec l'id: " + id));
 
         if (bonDeSortie.getStatut() != BonDeSortieStatus.BROUILLON) {
-            throw new IllegalStateException("Seuls les bons de sortie brouillons peuvent être validés");
+            throw new IllegalStateException("Seuls les bons de sortie brouillons peuvent etre valides");
         }
 
         // Traiter chaque ligne avec FIFO

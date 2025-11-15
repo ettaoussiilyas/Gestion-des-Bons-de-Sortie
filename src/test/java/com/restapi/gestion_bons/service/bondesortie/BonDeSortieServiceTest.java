@@ -348,7 +348,7 @@ class BonDeSortieServiceTest {
         IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> bonDeSortieService.valider(1L));
 
-        assertTrue(exception.getMessage().contains("Seuls les bons de sortie brouillons peuvent être valides"));
+        assertTrue(exception.getMessage().contains("Seuls les bons de sortie brouillons peuvent etre valides"));
         System.out.println("Scenario 8 reussi: Validation echoue si statut non brouillon");
     }
 
