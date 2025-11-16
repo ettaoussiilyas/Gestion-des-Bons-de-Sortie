@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,5 +63,20 @@ public class FournisseurService implements FournisseurContract {
             throw new EntityNotFoundException("Fournisseur not found with id: " + id);
         }
         fournisseurDAO.deleteById(id);
+    }
+
+    // PARTIE 1: Exercice 2
+    public List<FournisseurResponseDTO> predicateGmail(String extention){
+        Predicate<Fournisseur> condition = c -> c.getEmail().endsWith(extention);
+//        return fournisseurDAO.findAll()
+//                .stream()
+//                .filter(condition)
+//                .map(fournisseurMapper::toResponseDto)
+//                .toList();
+        return fournisseurDAO.findFournisseurByEmailEndsWith(extention)
+                .stream()
+                .map(fournisseurMapper::toResponseDto)
+                .toList();
+
     }
 }
