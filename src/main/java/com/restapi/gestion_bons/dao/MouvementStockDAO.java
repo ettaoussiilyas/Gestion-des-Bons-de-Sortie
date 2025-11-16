@@ -1,6 +1,9 @@
 package com.restapi.gestion_bons.dao;
 
 import com.restapi.gestion_bons.entitie.MouvementStock;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +25,9 @@ public interface MouvementStockDAO extends JpaRepository<MouvementStock, Long>, 
 
     @Query("SELECT m FROM MouvementStock m WHERE m.typeMouvement = :type AND m.dateMouvement BETWEEN :start AND :ends")
     List<MouvementStock> getListDate(@Param("type") String type, @Param("start") LocalDateTime start, @Param("ends") LocalDateTime date);
+
+//    Page<MouvementStock> findAll(Specification<MouvementStock> spec, Pageable pageable);
+//    Page<MouvementStock> findAll(Pageable pageable);
+
 
 }

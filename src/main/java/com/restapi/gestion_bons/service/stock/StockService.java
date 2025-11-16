@@ -17,6 +17,8 @@ import com.restapi.gestion_bons.entitie.enums.TypeMouvement;
 import com.restapi.gestion_bons.mapper.MouvementStockMapper;
 import com.restapi.gestion_bons.specification.MouvementStockSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -279,4 +281,91 @@ public class StockService implements StockContract {
                 .collect(Collectors.toList());
     }
 
+    // ------------------------------- Pageable Implementation ------------------------------
+    @Override
+    @Transactional(readOnly = true)
+    public Page<MouvementStockResponseDTO> getMouvementsWithFiltersPaged(
+            String typeMouvement,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            Long produitId,
+            String produitReference,
+            Pageable pageable) {
+
+        Specification<MouvementStock> spec = (root, query, criteriaBuilder) -> null;
+
+        if (typeMouvement != null) {
+            try {
+                TypeMouvement type = TypeMouvement.valueOf(typeMouvement);
+                spec = spec.and(MouvementStockSpecification.hasTypeMouvement(type));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Type de mouvement non valide: " + typeMouvement);
+            }
+        }
+
+        if (startDate != null && endDate != null) {
+            spec = spec.and(MouvementStockSpecification.dateMouvementBetween(startDate, endDate));
+        }
+
+        if (produitId != null) {
+            spec = spec.and(MouvementStockSpecification.hasProduit(produitId));
+        }
+
+        if (produitReference != null) {
+            spec = spec.and(MouvementStockSpecification.hasProduitReference(produitReference));
+        }
+
+        Page<MouvementStock> mouvementPage = mouvementStockDAO.findAll(spec, pageable);
+        return mouvementPage.map(mouvementStockMapper::toResponseDto);
+    }
+
+    @Override
+    public Page<MouvementStockResponseDTO> searchPaged(
+            Long id,
+            String typeMouvement,
+            LocalDateTime dateMouvement,
+            LocalDateTime startDateMouvement,
+            LocalDateTime endDateMouvement,
+            Integer quantite,
+            Integer minQuantite,
+            Integer maxQuantite,
+            Double prixUnitaireLot,
+            Long produitId,
+            Long lotId,
+            Long bonDeSortieId,
+            Pageable pageable) {
+
+        Specification<MouvementStock> spec = (root, query, criteriaBuilder) -> null;
+
+        if (id != null) spec = spec.and(MouvementStockSpecification.hasId(id));
+
+        if (typeMouvement != null) {
+            try {
+                TypeMouvement type = TypeMouvement.valueOf(typeMouvement);
+                spec = spec.and(MouvementStockSpecification.hasTypeMouvement(type));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Type de mouvement non valide" + e);
+            }
+        }
+
+        if (dateMouvement != null) {
+            spec = spec.and(MouvementStockSpecification.hasDateMouvement(dateMouvement));
+        } else if (startDateMouvement != null && endDateMouvement != null) {
+            spec = spec.and(MouvementStockSpecification.dateMouvementBetween(startDateMouvement, endDateMouvement));
+        }
+
+        if (quantite != null) {
+            spec = spec.and(MouvementStockSpecification.hasQantite(quantite));
+        } else if (minQuantite != null && maxQuantite != null) {
+            spec = spec.and(MouvementStockSpecification.quantityBetween(minQuantite, maxQuantite));
+        }
+
+        if (prixUnitaireLot != null) spec = spec.and(MouvementStockSpecification.hasPrixUnitaireLot(prixUnitaireLot));
+        if (produitId != null) spec = spec.and(MouvementStockSpecification.hasProduit(produitId));
+        if (lotId != null) spec = spec.and(MouvementStockSpecification.hasLot(lotId));
+        if (bonDeSortieId != null) spec = spec.and(MouvementStockSpecification.hasBonDeSortie(bonDeSortieId));
+
+        Page<MouvementStock> mouvementPage = mouvementStockDAO.findAll(spec, pageable);
+        return mouvementPage.map(mouvementStockMapper::toResponseDto);
+    }
 }

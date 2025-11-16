@@ -69,12 +69,13 @@ public class MouvementStockSpecification {
     // get dateMouvement Between
     public static Specification<MouvementStock> dateMouvementBetween(LocalDateTime start, LocalDateTime end){
         return ((root, query, criteriaBuilder) -> {
-           if(start == null && end == null) return null;
-           if(end == null) return criteriaBuilder.greaterThanOrEqualTo(root.get("dateMouvement"), end);
-           if(start == null) return criteriaBuilder.lessThanOrEqualTo(root.get("dateMouvement"), start);
-           return criteriaBuilder.between(root.get("dateMouvement"), start, end);
+            if(start == null && end == null) return null;
+            if(start == null) return criteriaBuilder.lessThanOrEqualTo(root.get("dateMouvement"), end);
+            if(end == null) return criteriaBuilder.greaterThanOrEqualTo(root.get("dateMouvement"), start);
+            return criteriaBuilder.between(root.get("dateMouvement"), start, end);
         });
     }
+
 //    public static Specification<MouvementStock> dateMouvementBetween(LocalDateTime start, LocalDateTime end){
 //        return ((root, query, criteriaBuilder) -> {
 //           if(start == null && end == null) return null;
